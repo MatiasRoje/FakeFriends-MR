@@ -25,6 +25,9 @@ application.register("ranking", RankingController)
 import SelectDeckController from "./select_deck_controller"
 application.register("select-deck", SelectDeckController)
 
+import ToggleEmojiController from "./toggle_emoji_controller"
+application.register("toggle-emoji", ToggleEmojiController)
+
 import TransitionController from "./transition_controller"
 application.register("transition", TransitionController)
 
