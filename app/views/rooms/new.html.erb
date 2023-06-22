@@ -14,12 +14,12 @@
       <div class="form-group">
         <label>Game Deck:</label>
         <div class="card-decks">
-          <label for="dev" class="card-deck" data-select-deck-target="deckButton" data-action="change->select-deck#selectDeck">
-          <input type="radio" id="dev" name="room[deck]" value="deck1" required>
+          <label for="devs" class="card-deck" data-select-deck-target="deckButton" data-action="change->select-deck#selectDeck">
+          <input type="radio" id="devs" name="room[deck]" value="devs" required>
           <!-- Card content for deck 1 -->
-          <img src="" alt="Developer Deck">
+          <%= image_tag "devdeck.jpg", alt:"Developer Deck" %>
           <div class="card-deck-title">
-            <h3>Dev</h3>
+            <h3>Devs</h3>
           </div>
           <div class="card-deck-content">
             <p>FakeFriends but make shorter for developers</p>
@@ -27,9 +27,9 @@
           </div>
           </label>
           <label for="fakefriends" class="card-deck" data-select-deck-target="deckButton" data-action="change->select-deck#selectDeck">
-          <input type="radio" id="fakefriends" name="room[deck]" value="deck2" required>
+          <input type="radio" id="fakefriends" name="room[deck]" value="fakefriends" required>
           <!-- Card content for deck 2 -->
-          <img src="" alt="Fakefriends Deck">
+          <%= image_tag "fakefriends-deck.jpg", alt:"Fakefriends Deck" %>
           <div class="card-deck-title">
             <h3>Fakefriends</h3>
           </div>
