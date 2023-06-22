@@ -16,8 +16,11 @@ application.register("change-number", ChangeNumberController)
 import ChangePageController from "./change_page_controller"
 application.register("change-page", ChangePageController)
 
-import ExpandCardController from "./expand_card_controller"
-application.register("expand-card", ExpandCardController)
+import ChangePageSecondController from "./change_page_second_controller"
+application.register("change-page-second", ChangePageSecondController)
+
+import HelloController from "./hello_controller"
+application.register("hello", HelloController)
 
 import RankingController from "./ranking_controller"
 application.register("ranking", RankingController)

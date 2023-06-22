@@ -9,52 +9,50 @@
 require "faker"
 require "uri"
 
-puts "Cleaning up the database..."
+puts "Cleaning up the database!"
 
 User.destroy_all
 Room.destroy_all
 Question.destroy_all
 
-puts "Creating three users for development..."
-
-# user1 = User.new(username: "Pablo", email: "pablo@pablo.com", password: "123456")
-# user1.photo.attach(io: "app/assets/images/Pablo_Escobar_Mug.jpeg", filename: "file_name")
-# user1.save!
-
-# user2 = User.new(username: "Homer", email: "homer@homer.com", password: "123456")
-# user2.photo.attach(io: "app/assets/images/Homer_Simpson.webp", filename: "file_name")
-# user2.save!
-
-# user3 = User.new(username: "Harry", email: "harry@harry.com", password: "123456")
-# user3.photo.attach(io: "app/assets/images/Harry_Potter.jpeg", filename: "file_name")
-# user3.save!
+puts "Creating six fake users!"
+6.times do
+  user = User.new(
+    username: Faker::Name.name.to_s,
+    email: Faker::Internet.email.to_s,
+    password: Faker::Internet.password.to_s
+  )
+  file = URI.open("https://res.cloudinary.com/dzotx5j9x/image/upload/v1678275332/development/qk3v9cmx5y49f391uh2jwrn26sbb.jpg")
+  user.photo.attach(io: file, filename: "file_name")
+  user.save!
+end
 
 puts "#{User.count} users were created."
 puts "..."
-puts "Creating the 4 main questions with 4 answers per questions for first round."
+puts "Creating the 4 main questions with 4 answers each for first round."
 
 first_question = Question.create(content: "What pet would you most like to have?", round: 1, key_words: "ideal pet")
-first_answer = Answer.new(content: "Dogs", plural: true)
+first_answer = Answer.new(content: "Dog")
 first_answer.question = first_question
 first_answer.save!
-second_answer = Answer.new(content: "Cats", plural: true)
+second_answer = Answer.new(content: "Cat")
 second_answer.question = first_question
 second_answer.save!
-third_answer = Answer.new(content: "Frogs", plural: true)
+third_answer = Answer.new(content: "Frog")
 third_answer.question = first_question
 third_answer.save!
-fourth_answer = Answer.new(content: "Rats", plural: true)
+fourth_answer = Answer.new(content: "Rat")
 fourth_answer.question = first_question
 fourth_answer.save!
 
 second_question = Question.create(content: "What's your biggest fear?", round: 1, key_words: "biggest fear")
-first_answer = Answer.new(content: "Spiders", plural: true)
+first_answer = Answer.new(content: "Spiders")
 first_answer.question = second_question
 first_answer.save!
-second_answer = Answer.new(content: "Heights", plural: true)
+second_answer = Answer.new(content: "Heights")
 second_answer.question = second_question
 second_answer.save!
-third_answer = Answer.new(content: "Darkness")
+third_answer = Answer.new(content: "Dark")
 third_answer.question = second_question
 third_answer.save!
 fourth_answer = Answer.new(content: "Coding")
@@ -65,7 +63,7 @@ third_question = Question.create(content: "What food could you not live without?
 first_answer = Answer.new(content: "Cheese")
 first_answer.question = third_question
 first_answer.save!
-second_answer = Answer.new(content: "Potatoes", plural: true)
+second_answer = Answer.new(content: "Potatoes")
 second_answer.question = third_question
 second_answer.save!
 third_answer = Answer.new(content: "Pasta")
@@ -92,4 +90,4 @@ fourth_answer.save!
 puts "All done!"
 puts "#{Question.where(round: 1).count} questions were created for the first round. #{Answer.count} were created and are attached to those questions, 4 for question."
 puts "..."
-puts "Congrats for finishing up the project, keep up the good work!"
+puts "Good luck with the project!"
