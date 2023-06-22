@@ -14,8 +14,8 @@ class RoomsController < ApplicationController
   end
 
   def create
-    raise
     @room = Room.new(room_params)
+    @deck = params[:room][:deck]
     @room.user = current_user
     # Generating four digit random code to be used as password for
     # the room
@@ -23,7 +23,7 @@ class RoomsController < ApplicationController
     if @room.save
       # Pulling the hard-coded questions from the seeds file and storing
       # them in the room we just created as "room_questions" (joining table)
-      @questions = Question.where(round: 1)
+      @questions = Question.where(round: 1, deck: @deck)
       @questions.each do |question|
         @room_question = RoomQuestion.new
         @room_question.question = question

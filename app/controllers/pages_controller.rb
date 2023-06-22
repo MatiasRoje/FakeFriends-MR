@@ -2,7 +2,6 @@ class PagesController < ApplicationController
   skip_before_action :authenticate_user!, only: [:home, :about]
 
   def post_join_room
-    raise
     @room = Room.find_by(room_code: params[:user][:name])
 
     if @room == nil
