@@ -14,6 +14,7 @@ class RoomsController < ApplicationController
   end
 
   def create
+    raise
     @room = Room.new(room_params)
     @room.user = current_user
     # Generating four digit random code to be used as password for
