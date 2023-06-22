@@ -14,16 +14,12 @@
   align-items: center;
 }
 
-// Rooms card
-
-.rooms-card {
+.your-games-card {
   background: #fff;
   text-align: center;
   border-radius: 8px;
   overflow: hidden;
   transition: all 0.1ms ease-in-out;
-  position: relative;
-  z-index: 10;
 
   p {
     color: #212529;
@@ -38,6 +34,7 @@
   font-size: 13px;
   padding: 16px 0;
   color: #fff;
+  clip-path: polygon(0 0, 100% 0%, 100% 85%, 0% 100%);
 }
 
 .header-standard {
@@ -54,29 +51,4 @@
 .card-date {
   font-style: italic;
   font-size: 14px;
-}
-
-.expandable-section {
-  margin-top: 10px;
-  position: relative;
-  transition: all 0.3s;
-}
-
-.expand-button {
-  background-color: transparent;
-  border: none;
-  cursor: pointer;
-}
-
-.expand-button i {
-  font-size: 22px;
-}
-
-.expanded-content {
-  margin-top: 10px;
-}
-
-.card-details {
-  font-style: normal;
-  font-size: 16px;
 }

@@ -1,6 +1,6 @@
 import { Controller } from "@hotwired/stimulus";
 
-// Connects to data-controller="change-page"
+// Connects to data-controller="change-page-second"
 export default class extends Controller {
   static targets = ["button", "elementLeft"];
   static values = {
