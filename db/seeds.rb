@@ -33,7 +33,7 @@ puts "#{User.count} users were created."
 puts "..."
 puts "Creating the 4 main questions with 4 answers per questions for first round."
 
-first_question = Question.create(content: "What pet would you most like to have?", round: 1, key_words: "ideal pet")
+first_question = Question.create(content: "What pet would you most like to have?", round: 1, key_words: "ideal pet", deck: "devs")
 first_answer = Answer.new(content: "Dogs", plural: true)
 first_answer.question = first_question
 first_answer.save!
@@ -47,7 +47,7 @@ fourth_answer = Answer.new(content: "Rats", plural: true)
 fourth_answer.question = first_question
 fourth_answer.save!
 
-second_question = Question.create(content: "What's your biggest fear?", round: 1, key_words: "biggest fear")
+second_question = Question.create(content: "What's your biggest fear?", round: 1, key_words: "biggest fear", deck: "devs")
 first_answer = Answer.new(content: "Spiders", plural: true)
 first_answer.question = second_question
 first_answer.save!
@@ -61,7 +61,7 @@ fourth_answer = Answer.new(content: "Coding")
 fourth_answer.question = second_question
 fourth_answer.save!
 
-third_question = Question.create(content: "What food could you not live without?", round: 1, key_words: "most important food")
+third_question = Question.create(content: "What food could you not live without?", round: 1, key_words: "most important food", deck: "devs")
 first_answer = Answer.new(content: "Cheese")
 first_answer.question = third_question
 first_answer.save!
@@ -75,7 +75,7 @@ fourth_answer = Answer.new(content: "Rice")
 fourth_answer.question = third_question
 fourth_answer.save!
 
-fourth_question = Question.create(content: "If you had to choose, which sense would you give up?", round: 1, key_words: "least important sense")
+fourth_question = Question.create(content: "If you had to choose, which sense would you give up?", round: 1, key_words: "least important sense", deck: "devs")
 first_answer = Answer.new(content: "Hearing")
 first_answer.question = fourth_question
 first_answer.save!
