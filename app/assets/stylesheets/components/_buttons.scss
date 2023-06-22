@@ -15,19 +15,13 @@
   }
 }
 
-.ff-btn-form-red {
-  display: block;
-  padding: 20px 0px 20px 0px;
-  width: 100%;
-  margin-top: 20px;
-  background: #ff3152;
-  border-radius: 8px;
-  text-align: center;
+.room-btn {
+  color: #fff;
   font-size: larger;
-  color: #f4f1ff;
-  border: none;
-  z-index: 10;
-  position: relative;
+}
+
+.room-btn:hover {
+  color: #fff;
 }
 
 .ff-btn-white {
@@ -51,21 +45,6 @@
   font-size: larger;
   text-align: center;
   margin-top: 55px;
-}
-
-.ranking-button {
-  margin-top: 10px;
-  padding: 20px 30px;
-  background: #ff3152;
-  border-radius: 8px;
-  text-align: center;
-  z-index: 10;
-
-  p {
-    margin: 0;
-    padding: 0;
-    font-size: larger;
-  }
 }
 
 .button-round-1 {

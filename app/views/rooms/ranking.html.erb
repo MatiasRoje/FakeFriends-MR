@@ -4,8 +4,8 @@
 
 <div class="ff-container">
   <h1 class="ff-title-ranking">Ranking</h1>
-  <div class="ff-ranking-flex">
 
+  <div class="ff-ranking-flex">
     <div data-controller="ranking"
       data-ranking-target="friends"
       data-ranking-rankingroom-id-value="<%= @room.id %>">
@@ -13,13 +13,15 @@
       <%= render "shared/ranking_room", winner: @winner, fakefriend: @fakefriend%>
     </div>
 
-    <div class="ranking-card">
-      <%= link_to new_room_path, class: "ranking-button" do %>
+    <div class="flex-btn-landing">
+      <%= link_to new_room_path, class: "ff-btn-red" do %>
       <p>Play again?</p>
       <% end %>
     </div>
   </div>
+
   <div class="flex-back-link">
     <%= link_to "<< BACK", root_path %>
   </div>
+
 </div>

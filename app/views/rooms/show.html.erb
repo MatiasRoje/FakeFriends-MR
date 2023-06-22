@@ -4,21 +4,19 @@
 
 <div class="ff-flex-page" data-controller="transition">
   <div class="transition transition-1" data-transition-target="elementLeft"></div>
-  <div>
     <h2 class="ff-title-large"><%= @room.name %></h2>
     <h3 class="room-code">Room code: <%= @room.room_code %></h3>
-  </div>
 
   <div class="ff-info-container">
     <div class="avatar-container">
       <ul>
-          <div class="grid-avatars"
-          data-controller="waiting-room-subscription"
-          data-waiting-room-subscription-target ="avatars"
-          data-waiting-room-subscription-waitingroom-id-value="<%= @room.id %>">
-          <!-- HERE ACTION CABLE IS GOING TO SYNCHRONIZE, WHEN NEW PLAYER IS ENTERING-->
-            <%= render "waiting_rooms/waiting_room" %>
-          </div>
+        <div class="grid-avatars"
+        data-controller="waiting-room-subscription"
+        data-waiting-room-subscription-target ="avatars"
+        data-waiting-room-subscription-waitingroom-id-value="<%= @room.id %>">
+        <!-- HERE ACTION CABLE IS GOING TO SYNCHRONIZE, WHEN NEW PLAYER IS ENTERING-->
+          <%= render "waiting_rooms/waiting_room" %>
+        </div>
       </ul>
     </div>
     <div>
@@ -27,8 +25,8 @@
       </div>
       <p class="waiting">waiting for users to connect</p>
     </div>
-  </div>
-  <div class="ff-container">
-    <%= link_to "Start game",  room_room_question_path(@room, @room.room_questions.first), class: "ff-btn-form-red", data: { action: "click->transition#pressLinkLeft" } %>
+    <div class="flex-btn-landing">
+      <%= link_to "Start game",  room_room_question_path(@room, @room.room_questions.first), class: "ff-btn-red room-btn", data: { action: "click->transition#pressLinkLeft" } %>
+    </div>
   </div>
 </div>
