@@ -1,4 +1,5 @@
 .ff-btn-red {
+  display: block;
   padding: 20px 0px;
   width: 100%;
   margin-top: 20px;
@@ -44,6 +45,12 @@
     color: #212529;
     font-size: larger;
   }
+}
+
+.ff-btn-transparent {
+  font-size: larger;
+  text-align: center;
+  margin-top: 55px;
 }
 
 .ranking-button {

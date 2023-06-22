@@ -17,7 +17,7 @@
         <%= link_to new_room_path, class: "ff-btn-white", data: { action: "click->transition#pressLinkLeft" } do %>
           <p>Host a game</p>
         <% end %>
-        <%= link_to about_path, class: "link-how-to-play", data: { action: "click->transition#pressLinkLeft" } do %>
+        <%= link_to about_path, class: "ff-btn-transparent", data: { action: "click->transition#pressLinkLeft" } do %>
           <p>How to play</p>
         <% end %>
         </div>
@@ -32,12 +32,14 @@
     </div>
     <div class="home-body">
       <div class="user-menu">
-        <%= link_to root_path, class: "link-how-to-play", data: { action: "click->transition#pressLinkLeft" } do %>
-        <p>Your profile</p>
-        <% end %>
-        <%= link_to rooms_path, class: "link-how-to-play", data: { action: "click->transition#pressLinkUserMenu" } do %>
-        <p>Your games</p>
-        <% end %>
+        <div class="flex-btn-landing">
+          <%= link_to root_path, class: "ff-btn-transparent", data: { action: "click->transition#pressLinkLeft" } do %>
+          <p>Your profile</p>
+          <% end %>
+          <%= link_to rooms_path, class: "ff-btn-transparent", data: { action: "click->transition#pressLinkUserMenu" } do %>
+          <p>Your games</p>
+          <% end %>
+        </div>
       </div>
     </div>
   </div>
