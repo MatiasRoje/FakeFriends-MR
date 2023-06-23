@@ -1,17 +1,12 @@
 .alert {
-  position: fixed;
-  margin: 0;
   color: darkgoldenrod;
   border-color: darkgoldenrod;
-
-  bottom: 20px;
-  left: 50%;
-  transform: translate(-50%);
+  margin-top: 20px;
 }
 
 .fade-out {
   animation: fadeOut 2s forwards;
-  animation-delay: 3.5s;
+  animation-delay: 1.5s;
 }
 
 @keyframes fadeOut {

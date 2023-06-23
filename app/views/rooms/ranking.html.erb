@@ -11,12 +11,12 @@
       data-ranking-rankingroom-id-value="<%= @room.id %>">
       <!-- HERE THE PARTIAL WILL BE INSERTED -->
       <%= render "shared/ranking_room", winner: @winner, fakefriend: @fakefriend%>
-      <div class="chat-emojis">
+      <div class="chat-emojis" data-controller="ranking" data-ranking-target="emojis">
         <p data-action="click->toggle-emoji#toggleEmoji">😂</p>
         <p data-action="click->toggle-emoji#toggleEmoji">😭</p>
         <p data-action="click->toggle-emoji#toggleEmoji">💩</p>
         <p data-action="click->toggle-emoji#toggleEmoji">❤️</p>
-    </div>
+      </div>
     </div>
 
     <div class="flex-btn-landing">
