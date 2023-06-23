@@ -1,4 +1,5 @@
 .ff-btn-red {
+  display: block;
   padding: 20px 0px;
   width: 100%;
   margin-top: 20px;
@@ -29,6 +30,15 @@
   position: relative;
 }
 
+.room-btn {
+  color: #fff;
+  font-size: larger;
+}
+
+.room-btn:hover {
+  color: #fff;
+}
+
 .ff-btn-white {
   padding: 20px 0px;
   width: 100%;
@@ -46,19 +56,10 @@
   }
 }
 
-.ranking-button {
-  margin-top: 10px;
-  padding: 20px 30px;
-  background: #ff3152;
-  border-radius: 8px;
+.ff-btn-transparent {
+  font-size: larger;
   text-align: center;
-  z-index: 10;
-
-  p {
-    margin: 0;
-    padding: 0;
-    font-size: larger;
-  }
+  margin-top: 55px;
 }
 
 .button-round-1 {

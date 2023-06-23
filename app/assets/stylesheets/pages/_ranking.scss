@@ -2,5 +2,23 @@
   display: flex;
   flex-direction: column;
   align-items: center;
+  justify-content: center;
+  width: 800px;
   gap: 20px;
+}
+
+.chat-emojis {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 10px 0 10px 0;
+  font-size: 35px;
+  gap: 30px;
+  position: relative;
+  z-index: 10;
+  animation-duration: 2s;
+}
+
+.animate__animated.animate__fadeOutUpBig {
+  --animate-duration: 3.5s;
 }

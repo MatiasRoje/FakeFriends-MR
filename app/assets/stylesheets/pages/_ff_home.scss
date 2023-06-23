@@ -14,9 +14,11 @@
 }
 
 .home-body {
+  max-width: 800px;
+  margin: 0 auto;
   display: flex;
   flex-direction: column;
-  margin-top: 50px;
+  margin-top: 30px;
   padding-bottom: 35px;
   height: 85%;
 }
