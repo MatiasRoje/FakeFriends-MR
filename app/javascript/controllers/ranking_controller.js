@@ -3,13 +3,11 @@ import { createConsumer } from "@rails/actioncable";
 
 // Connects to data-controller="ranking"
 export default class extends Controller {
-  static targets = ["friends", "emojis"];
+  static targets = ["friends"];
   static values = {
     rankingroomId: Number,
   };
-
   connect() {
-    console.log(this.emojisTarget);
     createConsumer().subscriptions.create(
       { channel: "RankingChannel", id: this.rankingroomIdValue },
       {
@@ -23,5 +21,3 @@ export default class extends Controller {
     );
   }
 }
-
-// { this.friendsTarget.insertAdjecentHTML("beforeend", data) }

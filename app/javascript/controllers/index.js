@@ -16,6 +16,9 @@ application.register("change-number", ChangeNumberController)
 import ChangePageController from "./change_page_controller"
 application.register("change-page", ChangePageController)
 
+import ChatController from "./chat_controller"
+application.register("chat", ChatController)
+
 import ExpandCardController from "./expand_card_controller"
 application.register("expand-card", ExpandCardController)
 
