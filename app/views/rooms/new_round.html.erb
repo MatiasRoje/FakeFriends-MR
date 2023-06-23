@@ -4,11 +4,17 @@
 
 <div class="ff-container" data-controller="transition">
   <div class="transition transition-1" data-transition-target="elementLeft"></div>
-  <p class="ff-title-creating-round">Calculating betrayal...</p>
-  <div class="loading-information">
-    <div class="loading-icon"><%= show_svg('loading.svg') %>
-  </div>
-  </div>
+    <p class="ff-title-new-round ">Waiting room</p>
+
+    <div id="game-board" data-controller=snake>
+      <canvas id="canvas" width="400" height="400" data-snake-target="canvas"></canvas>
+    </div>
+
+    <div class="loading-information">
+      <div class="loading-icon">
+        <p><%= show_svg('loading.svg') %> 2/6 users connected</p>
+      </div>
+    </div>
   <%= simple_form_for :user, url: room_create_round_path do |f| %>
       <%= f.submit "Start second round", class: "ff-btn-form-red" %>
   <% end %>
