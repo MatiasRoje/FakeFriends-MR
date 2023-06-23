@@ -16,8 +16,5 @@ export default class extends Controller {
         },
       }
     );
-    console.log(
-      `Subscribed to the ranking room with the id ${this.rankingroomIdValue}`
-    );
   }
 }

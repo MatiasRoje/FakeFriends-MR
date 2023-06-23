@@ -99,7 +99,20 @@ class RoomsController < ApplicationController
       @new_room_message.room = @room
       @new_room_message.save
 
-      ActionCable.server.broadcast('ranking_channel', room_message: @new_room_message)
+      @room_users_by_ranking = RoomUser.where(room_id: @room).order(counter: :desc)
+      @winner = @room_users_by_ranking.first
+      @fakefriend = @room_users_by_ranking.last
+
+      if @new_room_message.persisted?
+        # Broadcast the message to all subscribers
+        RankingChannel.broadcast_to(
+          @room,
+          render_to_string(
+            partial: "shared/ranking_room",
+            locals: { winner: @winner, fakefriend: @fakefriend, room_message: @new_room_message }
+          )
+        )
+      end
 
       head :ok
     else
@@ -108,12 +121,12 @@ class RoomsController < ApplicationController
       @room_users_by_ranking = RoomUser.where(room_id: @room).order(counter: :desc)
       @winner = @room_users_by_ranking.first
       @fakefriend = @room_users_by_ranking.last
-      @room_messages = Message.where(room_id: @room)
+      @room_message = Message.where(room_id: @room).last
       RankingChannel.broadcast_to(
         @room,
         render_to_string(
           partial: "shared/ranking_room",
-          locals: { winner: @winner, fakefriend: @fakefriend, room_message: @room_messages.last }
+          locals: { winner: @winner, fakefriend: @fakefriend, room_message: @room_message }
         )
       )
     end
