@@ -40,7 +40,7 @@ class RoomsController < ApplicationController
       @room_user.save
       redirect_to room_path(@room)
     else
-      flash[:alert] = @room.errors.full_messages.first
+      flash.now[:alert] = @room.errors.full_messages.first
       render :new, status: :unprocessable_entity
     end
   end
