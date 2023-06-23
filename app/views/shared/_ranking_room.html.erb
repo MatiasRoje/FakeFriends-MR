@@ -22,7 +22,9 @@
   </div>
 
   <div id="chat-messages">
-    <p class="new-emoji animate__animated animate__fadeOutUpBig"><%= room_message.text %></p>
+    <% if !room_message.nil? %>
+      <p class="new-emoji animate__animated animate__fadeOutUpBig"><%= room_message.text %></p>
+    <% end %>
   </div>
 
   <div id="chat-input">
