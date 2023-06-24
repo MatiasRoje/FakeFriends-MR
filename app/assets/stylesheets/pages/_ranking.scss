@@ -1,24 +1,60 @@
-.ff-ranking-flex {
+.ff-ranking-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  align-items: center;
+  justify-content: center;
+  gap: 50px;
+  margin: 50px 0 50px 0;
+}
+
+.animate__animated.animate__fadeOutUpBig {
+  --animate-duration: 7s;
+}
+
+#chat-container {
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
   width: 800px;
-  gap: 20px;
+  padding: 0 50px 0 50px;
 }
 
-.chat-emojis {
+#chat-messages {
+  font-size: 35px;
+  margin-bottom: 10px;
+  height: 0;
+}
+
+#chat-input {
   display: flex;
   align-items: center;
-  justify-content: center;
-  margin: 10px 0 10px 0;
-  font-size: 35px;
-  gap: 30px;
-  position: relative;
-  z-index: 10;
-  animation-duration: 2s;
 }
 
-.animate__animated.animate__fadeOutUpBig {
-  --animate-duration: 3.5s;
+#emoji-input {
+  display: none;
+}
+
+#emoji-panel {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: center;
+  gap: 30px;
+}
+
+#emoji-panel button {
+  font-size: 35px;
+  background: transparent;
+  border: none;
+  position: relative;
+  z-index: 10;
+}
+
+#send-button {
+  display: none;
+}
+.new-emoji {
+  position: relative;
+  z-index: 10;
 }

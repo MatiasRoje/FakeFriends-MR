@@ -110,3 +110,15 @@
   animation: bounceIn;
   animation-duration: 0.8s;
 }
+
+.invisible-button {
+  display: none;
+  background-color: transparent;
+  border: none;
+}
+
+.visible-button {
+  display: block;
+  background-color: white;
+  border: none;
+}

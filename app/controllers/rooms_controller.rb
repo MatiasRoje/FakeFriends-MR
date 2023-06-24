@@ -1,4 +1,6 @@
 class RoomsController < ApplicationController
+  skip_before_action :verify_authenticity_token
+
   def index
     @user = current_user
     user_as_room_user = RoomUser.where(user_id: @user)
@@ -85,17 +87,49 @@ class RoomsController < ApplicationController
   end
 
   def ranking
-    @room = Room.find(params[:room_id])
-    @room_users_by_ranking = RoomUser.where(room_id: @room).order(counter: :desc)
-    @winner = @room_users_by_ranking.first
-    @fakefriend = @room_users_by_ranking.last
-    RankingChannel.broadcast_to(
-      @room,
-      render_to_string(
-        partial: "shared/ranking_room",
-        locals: { winner: @winner, fakefriend: @fakefriend }
+
+  end
+
+  def ranking
+    if request.post?
+      # Handle the POST request
+      @room = Room.find(params[:room_id])
+      @submitted_emoji = params[:emoji]
+      @new_room_message = Message.new(text: @submitted_emoji)
+      @new_room_message.room = @room
+      @new_room_message.save
+
+      @room_users_by_ranking = RoomUser.where(room_id: @room).order(counter: :desc)
+      @winner = @room_users_by_ranking.first
+      @fakefriend = @room_users_by_ranking.last
+
+      if @new_room_message.persisted?
+        # Broadcast the message to all subscribers
+        RankingChannel.broadcast_to(
+          @room,
+          render_to_string(
+            partial: "shared/ranking_room",
+            locals: { winner: @winner, fakefriend: @fakefriend, room_message: @new_room_message }
+          )
+        )
+      end
+
+      head :ok
+    else
+      # Handle the GET request
+      @room = Room.find(params[:room_id])
+      @room_users_by_ranking = RoomUser.where(room_id: @room).order(counter: :desc)
+      @winner = @room_users_by_ranking.first
+      @fakefriend = @room_users_by_ranking.last
+      @room_message = Message.where(room_id: @room).last
+      RankingChannel.broadcast_to(
+        @room,
+        render_to_string(
+          partial: "shared/ranking_room",
+          locals: { winner: @winner, fakefriend: @fakefriend, room_message: @room_message }
+        )
       )
-    )
+    end
   end
 
   private

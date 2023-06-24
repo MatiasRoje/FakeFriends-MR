@@ -16,6 +16,9 @@ application.register("change-number", ChangeNumberController)
 import ChangePageController from "./change_page_controller"
 application.register("change-page", ChangePageController)
 
+import ChatController from "./chat_controller"
+application.register("chat", ChatController)
+
 import ExpandCardController from "./expand_card_controller"
 application.register("expand-card", ExpandCardController)
 
@@ -25,8 +28,8 @@ application.register("ranking", RankingController)
 import SelectDeckController from "./select_deck_controller"
 application.register("select-deck", SelectDeckController)
 
-import ToggleEmojiController from "./toggle_emoji_controller"
-application.register("toggle-emoji", ToggleEmojiController)
+import SnakeController from "./snake_controller"
+application.register("snake", SnakeController)
 
 import TransitionController from "./transition_controller"
 application.register("transition", TransitionController)

@@ -1,5 +1,6 @@
 Rails.application.routes.draw do
   devise_for :users
+  mount ActionCable.server => '/cable'
   root to: "pages#home"
   get "about", to: "pages#about"
   get "join_room", to: "pages#join_room", as: "join_room"
@@ -13,6 +14,6 @@ Rails.application.routes.draw do
     resources :room_questions, only: %i[show new create update]
     get "new_round", to: "rooms#new_round", as: "new_round"
     post "create_round", to: "rooms#create_round", as: "create_round"
-    get "ranking", to: "rooms#ranking", as: "ranking_room"
+    match "ranking", to: "rooms#ranking", via: [:get, :post]
   end
 end

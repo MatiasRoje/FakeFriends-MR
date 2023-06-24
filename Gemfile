@@ -84,3 +84,4 @@ gem "devise"
 gem "cloudinary"
 gem "faker"
 gem "uri"
+gem 'axios_rails', '~> 0.7.0'

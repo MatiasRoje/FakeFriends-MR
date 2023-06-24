@@ -29,6 +29,7 @@ export default class extends Controller {
 
     if (this.buttonTarget.dataset.round === "2") {
       if (currentPage + 1 === this.questionsArrayValue.length) {
+        console.log(this.finalUrlSecondValue);
         this.secondRoundTemplate(this.finalUrlSecondValue);
       } else {
         this.secondRoundTemplate(this.questionsArrayValue[currentPage + 1]);

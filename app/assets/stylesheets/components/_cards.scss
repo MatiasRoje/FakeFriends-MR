@@ -4,6 +4,15 @@
   align-items: center;
 }
 
+.ff-ranking-card-title {
+  position: relative;
+  z-index: 10;
+
+  span {
+    color: #ff3152;
+  }
+}
+
 .ff-ranking-card-name {
   font-style: italic;
 }

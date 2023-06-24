@@ -2,17 +2,43 @@
 <div id='stars2'></div>
 <div id='stars3'></div>
 
-<div class="ranking-card">
-  <h2 class="ff-ranking-card-title">Best Friend</h2>
-  <%= cl_image_tag winner.user.photo.key, :aspect_ratio=>"1.0", :height=>300, :width=>300, crop: "fill", gravity: "faces", class:"ranking-avatar", alt:"winner-img" %>
-  <p class="ff-ranking-card-name"><%= winner.user.username %></p>
-  <p><%= winner.counter %> points</p>
-</div>
-<div class="ranking-card">
-  <h2 class="ff-ranking-card-title">FakeFriend</h2>
-  <%= cl_image_tag fakefriend.user.photo.key, :aspect_ratio=>"1.0", :height=>300, :width=>300, crop: "fill", gravity: "faces", class:"ranking-avatar", alt:"fakefriend-img" %>
-  <p class="ff-ranking-card-name"><%= fakefriend.user.username %></p>
-  <p><%= fakefriend.counter %> points</p>
-</div>
-</div>
 
+<div id="chat-container" data-controller="chat">
+  <h1 class="ff-title-ranking">Ranking</h1>
+  <div class="ff-ranking-grid">
+    <div class="ranking-card">
+      <h2 class="ff-ranking-card-title">Best Friend</h2>
+      <%= cl_image_tag winner.user.photo.key, :aspect_ratio=>"1.0", :height=>300, :width=>300, crop: "fill", gravity: "faces", class:"ranking-avatar", alt:"winner-img" %>
+      <p class="ff-ranking-card-name"><%= winner.user.username %></p>
+      <p><%= winner.counter %> points</p>
+    </div>
+
+    <div class="ranking-card">
+      <h2 class="ff-ranking-card-title"><span>Fake</span>Friend</h2>
+      <%= cl_image_tag fakefriend.user.photo.key, :aspect_ratio=>"1.0", :height=>300, :width=>300, crop: "fill", gravity: "faces", class:"ranking-avatar", alt:"fakefriend-img" %>
+      <p class="ff-ranking-card-name"><%= fakefriend.user.username %></p>
+      <p><%= fakefriend.counter %> points</p>
+    </div>
+  </div>
+
+  <div id="chat-messages">
+    <% if !room_message.nil? %>
+      <p class="new-emoji animate__animated animate__fadeOutUpBig"><%= room_message.text %></p>
+    <% end %>
+  </div>
+
+  <div id="chat-input">
+    <form action="/rooms/<%=@room.id%>/ranking" method="post" target="_blank">
+      <input type="text" id="emoji-input" name="emoji" placeholder="Select an emoji" data-chat-target="emojiInput">
+      <div id="emoji-panel">
+        <button type="button" data-action="click->chat#selectAndSendEmoji">😂</button>
+        <button type="button" data-action="click->chat#selectAndSendEmoji">😭</button>
+        <button type="button" data-action="click->chat#selectAndSendEmoji">💩</button>
+        <button type="button" data-action="click->chat#selectAndSendEmoji">❤️</button>
+        <!-- Add more emoji buttons as needed -->
+      </div>
+      <button type="submit" id="send-button" data-chat-target="emojiButton">Send</button>
+      <%= hidden_field_tag :authenticity_token, form_authenticity_token %>
+    </form>
+  </div>
+</div>
