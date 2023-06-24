@@ -243,7 +243,7 @@ class Fruit {
 
   draw() {
     const ctx = this.controller.canvas.getContext("2d");
-    ctx.fillStyle = "#FF0000";
+    ctx.fillStyle = "#ff3152";
     ctx.fillRect(this.x, this.y, this.controller.scale, this.controller.scale);
   }
 }
