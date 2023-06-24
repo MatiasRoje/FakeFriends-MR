@@ -14,7 +14,7 @@
     </div>
 
     <div class="ranking-card">
-      <h2 class="ff-ranking-card-title">FakeFriend</h2>
+      <h2 class="ff-ranking-card-title"><span>Fake</span>Friend</h2>
       <%= cl_image_tag fakefriend.user.photo.key, :aspect_ratio=>"1.0", :height=>300, :width=>300, crop: "fill", gravity: "faces", class:"ranking-avatar", alt:"fakefriend-img" %>
       <p class="ff-ranking-card-name"><%= fakefriend.user.username %></p>
       <p><%= fakefriend.counter %> points</p>
