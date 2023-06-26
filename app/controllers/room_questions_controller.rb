@@ -59,15 +59,14 @@ class RoomQuestionsController < ApplicationController
       @picked_answer = Answer.find(params[:room_question][:answer_ids])
       @new_answer.answer = @picked_answer
       @new_answer.save
-
       # Redirecting the user to the next page
-      room_questions = @room_question.room.room_questions
-      index_of_room_question = room_questions.find_index(@room_question)
-      if index_of_room_question + 1 == room_questions.length
-        raise
-      else
-        raise
-      end
+      # room_questions = @room_question.room.room_questions
+      # index_of_room_question = room_questions.find_index(@room_question)
+      # if index_of_room_question + 1 == room_questions.length
+      #   redirect_to room_new_round(@room)
+      # else
+      #   redirect_to room_room_question_path(@room, room_questions[index_of_room_question + 1])
+      # end
     end
 
     if @room_question.round == 2
