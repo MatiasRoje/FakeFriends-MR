@@ -9,7 +9,7 @@ export default class extends Controller {
   displayButton(event) {
     this.buttonTarget.classList.remove("invisible-button");
     this.buttonTarget.classList.add(
-      "round-button",
+      "questionary-submit-button",
       "animate__animated",
       "animate__fadeInLeftBig"
     );
