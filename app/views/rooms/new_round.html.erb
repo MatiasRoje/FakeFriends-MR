@@ -10,10 +10,9 @@
       <canvas id="canvas" width="400" height="400" data-snake-target="canvas"></canvas>
     </div>
 
-    <div class="loading-information">
-      <div class="loading-icon">
-        <p><%= show_svg('loading.svg') %> 2/6 users connected</p>
-      </div>
+    <div class="loading-information" data-controller="new-round-subscription" data-new-round-subscription-room-id-value="<%= @room.id %>" data-new-round-subscription-target="users">
+      <!-- HERE ACTION CABLE IS GOING TO SYNCHRONIZE, WHEN NEW PLAYER IS ENTERING-->
+        <%= render "shared/new_round", room_users_count:  @room.users_count %>
     </div>
   <%= simple_form_for :user, url: room_create_round_path do |f| %>
       <%= f.submit "Start second round", class: "ff-btn-form-red" %>

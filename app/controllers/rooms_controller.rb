@@ -19,6 +19,7 @@ class RoomsController < ApplicationController
     @room = Room.new(room_params)
     @deck = params[:room][:deck]
     @room.user = current_user
+    @room.users_count = 0
     # Generating four digit random code to be used as password for
     # the room
     @room.room_code = 4.times.map{rand(10)}.join
@@ -49,6 +50,17 @@ class RoomsController < ApplicationController
 
   def new_round
     @room = Room.find(params[:room_id])
+    @room_users = RoomUser.where(room_id: @room).length
+    @room.users_count += 1
+    @room.save!
+
+    NewRoundChannel.broadcast_to(
+      @room,
+      render_to_string(
+        partial: "shared/new_round",
+        locals: { room_users_count:  @room.users_count }
+      )
+    )
   end
 
   def create_round
@@ -85,10 +97,6 @@ class RoomsController < ApplicationController
         redirect_to room_room_question_path(@room, @room_questions.first)
       end
     end
-  end
-
-  def ranking
-
   end
 
   def ranking

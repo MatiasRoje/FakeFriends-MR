@@ -1,23 +1,24 @@
 import { Controller } from "@hotwired/stimulus";
 import { createConsumer } from "@rails/actioncable";
 
-// Connects to data-controller="ranking"
 export default class extends Controller {
-  static targets = ["friends"];
+  static targets = ["users"];
   static values = {
-    rankingroomId: Number,
+    roomId: Number,
   };
+
   connect() {
+    console.log(this.roomIdValue);
     createConsumer().subscriptions.create(
-      { channel: "RankingChannel", id: this.rankingroomIdValue },
+      { channel: "NewRoundChannel", id: this.roomIdValue },
       {
         received: (data) => {
-          this.friendsTarget.innerHTML = data;
+          this.usersTarget.innerHTML = data;
         },
       }
     );
     console.log(
-      `Subscribed to the ranking room with the id ${this.rankingroomIdValue}`
+      `Subscribed to the new round view with the room id ${this.roomIdValue}`
     );
   }
 }
