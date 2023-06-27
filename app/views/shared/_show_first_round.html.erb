@@ -11,9 +11,9 @@
     <%= render "shared/timer_navbar" %>
 
     <div class="ff-flex-round-1">
-      <div class="ranking-card">
+      <div class="ranking-card" data-controller="display-button">
         <%= simple_form_for [@room, @room_question] do |f| %>
-          <div data-controller="answer-select">
+          <div data-controller="answer-select" data-action="change->display-button#displayButton">
             <%= f.association :answers,
               collection: @room_question.question.answers,
               label_method: :content,
@@ -21,12 +21,13 @@
               as: :radio_buttons,
               input_html: { class: "checkbox-style", data: { answer_select_target: "button", action: "change->answer-select#select" } },
               class: "form-check" %>
-          </div>
-          <div>
-            <%= f.button :submit, class: "invisible-button", remote: true, data: { change_page_target: "button", round: 1 } %>
-          </div>
+            <div class="container-round-button">
+              <button type="submit" class="invisible-button" title="Going to next view" data-action="click->change-page#goingNextPageFirstRound" data-change-page-target="button" data-display-button-target="button" data-round="1" >
+                  <i class="fas fa-arrow-right"></i>
+              </button>
+            </div>
         <% end %>
-      </div>
+          </div>
     </div>
   </div>
 </div>

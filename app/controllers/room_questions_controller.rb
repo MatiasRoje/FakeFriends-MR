@@ -2,6 +2,7 @@ class RoomQuestionsController < ApplicationController
   def show
     @users = User.all
     @room = Room.find(params[:room_id])
+    check_user_permits
     @room_question = RoomQuestion.find(params[:id])
 
     # Data to be transfered to the change_page Stimulus controller
@@ -31,6 +32,13 @@ class RoomQuestionsController < ApplicationController
       @user_as_answers_usernames = @user_as_answers.map { |user| user.username }
 
       # Data for showing the users who answered the @right_answer
+      @new_title = [
+        "Let's hope you were right...",
+        "The moment of truth!",
+        "Who expected that?",
+        "And the answer is...",
+        "That was clear!",
+      ].sample
       @users_with_right_answer = []
       RoomUser.where(room_id: @room).each do |room_user|
         user_answers_in_room = UserAnswer.where(room_id: @room, user_id: room_user.user.id)
@@ -51,6 +59,8 @@ class RoomQuestionsController < ApplicationController
     @room_question = RoomQuestion.find(params[:id])
 
     if @room_question.round == 1
+
+      # Creating new user answer for the room_question
       @new_answer = UserAnswer.new
       @new_answer.room = @room
       @new_answer.user = current_user
@@ -93,5 +103,11 @@ class RoomQuestionsController < ApplicationController
 
   def user_answers_params
     params.require(:answers).permit(:room_question)
+  end
+
+  def check_user_permits
+    if RoomUser.where(room_id: @room, user_id: current_user).empty?
+      redirect_to join_room_path, alert: "You need a code to access that room!"
+    end
   end
 end

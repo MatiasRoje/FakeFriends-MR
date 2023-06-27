@@ -19,8 +19,14 @@ application.register("change-page", ChangePageController)
 import ChatController from "./chat_controller"
 application.register("chat", ChatController)
 
+import DisplayButtonController from "./display_button_controller"
+application.register("display-button", DisplayButtonController)
+
 import ExpandCardController from "./expand_card_controller"
 application.register("expand-card", ExpandCardController)
+
+import NewRoundSubscriptionController from "./new_round_subscription_controller"
+application.register("new-round-subscription", NewRoundSubscriptionController)
 
 import RankingController from "./ranking_controller"
 application.register("ranking", RankingController)

@@ -117,8 +117,16 @@
   border: none;
 }
 
-.visible-button {
-  display: block;
-  background-color: white;
+.container-round-button {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-top: 10px;
+}
+
+.questionary-submit-button {
+  color: white;
+  font-size: 40px;
+  background: none;
   border: none;
 }

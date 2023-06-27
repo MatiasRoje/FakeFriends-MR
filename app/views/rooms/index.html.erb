@@ -5,24 +5,33 @@
 <div class="ff-rooms-container" data-controller="transition">
   <div class="transition transition-2" data-transition-target="elementRight"></div>
 
-  <div class="ff-grid-rooms">
-    <% @all_rooms_where_user_played.reverse.each do |room| %>
-      <% room_users_by_ranking = RoomUser.where(room_id: room).order(counter: :desc) %>
-      <% current_user_as_room_user = RoomUser.find_by(room_id: room, user_id: @user) %>
-      <% room_users_without_current_user = room_users_by_ranking.map do |room_user| %>
-        <% if room_user != current_user_as_room_user %>
-          <% room_user %>
+    <% if @all_rooms_where_user_played.empty? %>
+      <h2 class="ff-title-rooms ff-margin-v-50">No games played...</h2>
+      <div class="flex-btn-landing">
+        <%= link_to new_room_path, class: "ff-btn-red extend-button" do %>
+        <p>Play your fist game!</p>
         <% end %>
-        <% end %>
-      <% if room_users_by_ranking.first() == current_user_as_room_user %>
-        <%= render "shared/rooms_winner", room: room, user: current_user_as_room_user, room_users: room_users_without_current_user %>
-      <% elsif room_users_by_ranking.last() == current_user_as_room_user %>
-        <%= render "shared/rooms_fakefriend", room: room, user: current_user_as_room_user, room_users: room_users_without_current_user %>
-      <% else %>
-        <%= render "shared/rooms_standard", room: room, user: current_user_as_room_user, room_users: room_users_without_current_user %>
-      <% end %>
-      <% end %>
-  </div>
+      </div>
+    <% else %>
+      <div class="ff-grid-rooms">
+        <% @all_rooms_where_user_played.reverse.each do |room| %>
+          <% room_users_by_ranking = RoomUser.where(room_id: room).order(counter: :desc) %>
+          <% current_user_as_room_user = RoomUser.find_by(room_id: room, user_id: @user) %>
+          <% room_users_without_current_user = room_users_by_ranking.map do |room_user| %>
+            <% if room_user != current_user_as_room_user %>
+              <% room_user %>
+            <% end %>
+            <% end %>
+          <% if room_users_by_ranking.first() == current_user_as_room_user %>
+            <%= render "shared/rooms_winner", room: room, user: current_user_as_room_user, room_users: room_users_without_current_user %>
+          <% elsif room_users_by_ranking.last() == current_user_as_room_user %>
+            <%= render "shared/rooms_fakefriend", room: room, user: current_user_as_room_user, room_users: room_users_without_current_user %>
+          <% else %>
+            <%= render "shared/rooms_standard", room: room, user: current_user_as_room_user, room_users: room_users_without_current_user %>
+          <% end %>
+          <% end %>
+      </div>
+    <% end %>
 
   <div class="flex-back-link">
     <%= link_to '<< BACK', root_path, data: { action: "click->transition#pressLinkRight" } %>

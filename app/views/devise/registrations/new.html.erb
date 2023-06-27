@@ -1,5 +1,9 @@
+<div id='stars'></div>
+<div id='stars2'></div>
+<div id='stars3'></div>
+
 <div class="ff-container" data-controller="transition">
-  <div class="transition transition-2" data-transition-target="element"></div>
+  <div class="transition transition-2" data-transition-target="elementRight"></div>
   <h2 class="devise-header">Sign up</h2>
 
   <%= simple_form_for(resource, as: resource_name, url: registration_path(resource_name)) do |f| %>
@@ -22,13 +26,11 @@
       <%= f.input :photo, as: :file %>
     </div>
 
-    <div class="form-actions">
-      <%= f.button :submit, "Sign up", class: "ff-button-text-white" %>
-    </div>
+    <button type="submit" class="ff-btn-form-red extend-button">Sign up</button>
   <% end %>
 
   <div class="flex-back-link">
-    <%= link_to "<< BACK", root_path, data: { action: "click->transition#pressLink" } %>
+    <%= link_to "<< BACK", root_path, data: { action: "click->transition#pressLinkRight" } %>
   </div>
 
   <%= render "devise/shared/links" %>

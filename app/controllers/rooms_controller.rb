@@ -9,6 +9,7 @@ class RoomsController < ApplicationController
 
   def show
     @room = Room.find(params[:id])
+    check_user_permits
   end
 
   def new
@@ -19,6 +20,7 @@ class RoomsController < ApplicationController
     @room = Room.new(room_params)
     @deck = params[:room][:deck]
     @room.user = current_user
+    @room.users_count = 0
     # Generating four digit random code to be used as password for
     # the room
     @room.room_code = 4.times.map{rand(10)}.join
@@ -49,6 +51,22 @@ class RoomsController < ApplicationController
 
   def new_round
     @room = Room.find(params[:room_id])
+    check_user_permits
+
+    # data necessary for displaying the partial in the action cable
+    # view. users_count is hardcoded in the database and get incremented
+    # everything there is a get request on the view of this room
+    @room_users = RoomUser.where(room_id: @room).length
+    @room.users_count += 1
+    @room.save!
+
+    NewRoundChannel.broadcast_to(
+      @room,
+      render_to_string(
+        partial: "shared/new_round",
+        locals: { room_users_count:  @room.users_count }
+      )
+    )
   end
 
   def create_round
@@ -78,8 +96,9 @@ class RoomsController < ApplicationController
       redirect_to room_room_question_path(@room, @room_questions.first)
     else
       if @room.room_questions[0].round == 1
-        flash[:alert] = "Only the host can start the round!"
-        redirect_to room_new_round_path
+        redirect_to room_new_round_path, alert: "Only the host can start the round!"
+        # flash.now[:alert] = "Only the host can start the round!"
+        # render :new_round, status: :unprocessable_entity
       else
         redirect_to room_room_question_path(@room, @room_questions.first)
       end
@@ -87,13 +106,11 @@ class RoomsController < ApplicationController
   end
 
   def ranking
-
-  end
-
-  def ranking
     if request.post?
       # Handle the POST request
       @room = Room.find(params[:room_id])
+      check_user_permits
+
       @submitted_emoji = params[:emoji]
       @new_room_message = Message.new(text: @submitted_emoji)
       @new_room_message.room = @room
@@ -118,6 +135,8 @@ class RoomsController < ApplicationController
     else
       # Handle the GET request
       @room = Room.find(params[:room_id])
+      check_user_permits
+
       @room_users_by_ranking = RoomUser.where(room_id: @room).order(counter: :desc)
       @winner = @room_users_by_ranking.first
       @fakefriend = @room_users_by_ranking.last
@@ -136,5 +155,11 @@ class RoomsController < ApplicationController
 
   def room_params
     params.require(:room).permit(:name)
+  end
+
+  def check_user_permits
+    if RoomUser.where(room_id: @room, user_id: current_user).empty?
+      redirect_to join_room_path, alert: "You need a code to access that room!"
+    end
   end
 end
