@@ -78,8 +78,9 @@ class RoomsController < ApplicationController
       redirect_to room_room_question_path(@room, @room_questions.first)
     else
       if @room.room_questions[0].round == 1
-        flash[:alert] = "Only the host can start the round!"
-        redirect_to room_new_round_path
+        redirect_to room_new_round_path, alert: "Only the host can start the round!"
+        # flash.now[:alert] = "Only the host can start the round!"
+        # render :new_round, status: :unprocessable_entity
       else
         redirect_to room_room_question_path(@room, @room_questions.first)
       end

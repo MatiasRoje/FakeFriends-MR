@@ -6,3 +6,12 @@
   opacity: 1;
   transition: opacity 1s;
 }
+
+.ff-container-hidden {
+  max-width: 800px;
+  margin: -30px auto 0 auto;
+
+  // for the transition effect in the second round
+  opacity: 1;
+  transition: opacity 1s;
+}

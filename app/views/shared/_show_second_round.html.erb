@@ -9,7 +9,7 @@
   <%= render "shared/timer_navbar" %>
 
   <%# Hidden container for displaying the user with the right answer through JS%>
-  <div class="ff-container hidden" data-change-page-target="divHidden">
+  <div class="ff-container-hidden hidden" data-change-page-target="divHidden">
     <div class="ff-grid-round-2">
       <% @users_with_right_answer.each do |user|%>
         <div class="right-answer-wrapper">
@@ -23,13 +23,13 @@
   </div>
 
   <div class="ff-container" data-change-page-target="divToHide">
-    <div data-controller="add-username"
+    <div data-controller="add-username display-button"
         data-add-username-usernames-value="<%=@user_as_answers_usernames%>">
       <%= simple_form_for [@room, @room_question] do |f| %>
         <%= f.association :answers,
             as: :check_boxes,
-            collection_wrapper_tag: 'div',
-            collection_wrapper_class: 'ff-grid-round-2',
+            collection_wrapper_tag: "div",
+            collection_wrapper_class: "ff-grid-round-2",
             item_wrapper_tag: :div,
             item_wrapper_class: "image-select",
             collection: @user_as_answers,
@@ -37,7 +37,11 @@
             input_html: { class: "checkbox-second", multiple: true, checked: false, data: { add_username_target: "photo" } },
             label_method: lambda { |user| cl_image_tag(user.photo.key, :aspect_ratio=>"1.0", :height=>300, :width=>300, crop: "fill", gravity: "faces").html_safe },
             value_method: :id %>
-        <%= f.button :submit, class: 'white display-none', remote: true, data: { change_page_target: "button", round: 2 } %>
+        <div class="container-round-button">
+          <button type="submit" class=<%= @users_with_right_answer.length == 1 ? "questionary-submit-button" : "invisible-button" %> title="Going to next view" data-action="click->change-page#goingNextPageSecondRound" data-change-page-target="button" data-display-button-target="button" data-round="2" >
+              <i class="fas fa-arrow-right"></i>
+          </button>
+        </div>
       <% end %>
     </div>
 </div>
