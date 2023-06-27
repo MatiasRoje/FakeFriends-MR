@@ -9,6 +9,7 @@ class RoomsController < ApplicationController
 
   def show
     @room = Room.find(params[:id])
+    check_user_permits
   end
 
   def new
@@ -50,6 +51,7 @@ class RoomsController < ApplicationController
 
   def new_round
     @room = Room.find(params[:room_id])
+    check_user_permits
 
     # data necessary for displaying the partial in the action cable
     # view. users_count is hardcoded in the database and get incremented
@@ -107,6 +109,8 @@ class RoomsController < ApplicationController
     if request.post?
       # Handle the POST request
       @room = Room.find(params[:room_id])
+      check_user_permits
+
       @submitted_emoji = params[:emoji]
       @new_room_message = Message.new(text: @submitted_emoji)
       @new_room_message.room = @room
@@ -131,6 +135,8 @@ class RoomsController < ApplicationController
     else
       # Handle the GET request
       @room = Room.find(params[:room_id])
+      check_user_permits
+
       @room_users_by_ranking = RoomUser.where(room_id: @room).order(counter: :desc)
       @winner = @room_users_by_ranking.first
       @fakefriend = @room_users_by_ranking.last
@@ -149,5 +155,11 @@ class RoomsController < ApplicationController
 
   def room_params
     params.require(:room).permit(:name)
+  end
+
+  def check_user_permits
+    if RoomUser.where(room_id: @room, user_id: current_user).empty?
+      redirect_to join_room_path, alert: "You need a code to access that room!"
+    end
   end
 end

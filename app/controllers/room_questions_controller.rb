@@ -2,6 +2,7 @@ class RoomQuestionsController < ApplicationController
   def show
     @users = User.all
     @room = Room.find(params[:room_id])
+    check_user_permits
     @room_question = RoomQuestion.find(params[:id])
 
     # Data to be transfered to the change_page Stimulus controller
@@ -66,14 +67,6 @@ class RoomQuestionsController < ApplicationController
       @picked_answer = Answer.find(params[:room_question][:answer_ids])
       @new_answer.answer = @picked_answer
       @new_answer.save
-      # Redirecting the user to the next page
-      # room_questions = @room_question.room.room_questions
-      # index_of_room_question = room_questions.find_index(@room_question)
-      # if index_of_room_question + 1 == room_questions.length
-      #   redirect_to room_new_round(@room)
-      # else
-      #   redirect_to room_room_question_path(@room, room_questions[index_of_room_question + 1])
-      # end
     end
 
     if @room_question.round == 2
@@ -110,5 +103,11 @@ class RoomQuestionsController < ApplicationController
 
   def user_answers_params
     params.require(:answers).permit(:room_question)
+  end
+
+  def check_user_permits
+    if RoomUser.where(room_id: @room, user_id: current_user).empty?
+      redirect_to join_room_path, alert: "You need a code to access that room!"
+    end
   end
 end
