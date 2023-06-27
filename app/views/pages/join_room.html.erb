@@ -9,7 +9,7 @@
     <h2 class="ff-title-medium ff-margin-v-50">Join Room</h2>
     <%= simple_form_for :user, url: post_join_room_path, wrapper: :inline_form, html: { class: "ff-margin-top-50" } do |f| %>
       <%= f.input :name, label: true, placeholder: "Enter a room code...", input_html: { value: nil } %>
-      <%= f.submit "Join room", class: "ff-btn-form-red extend-room-form" %>
+      <%= f.submit "Join room", class: "ff-btn-form-red extend-button" %>
     <% end %>
     <% flash.each do |type, msg| %>
       <div class="alert fade-out">
