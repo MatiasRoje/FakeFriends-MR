@@ -31,6 +31,13 @@ class RoomQuestionsController < ApplicationController
       @user_as_answers_usernames = @user_as_answers.map { |user| user.username }
 
       # Data for showing the users who answered the @right_answer
+      @new_title = [
+        "Let's hope you were right...",
+        "The moment of truth!",
+        "Who expected that?",
+        "And the answer is...",
+        "That was clear!",
+      ].sample
       @users_with_right_answer = []
       RoomUser.where(room_id: @room).each do |room_user|
         user_answers_in_room = UserAnswer.where(room_id: @room, user_id: room_user.user.id)

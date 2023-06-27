@@ -1,6 +1,7 @@
 <div data-controller="change-page"
   data-change-page-questions-array-value="<%=@array_of_urls%>"
-  data-change-page-final-url-second-value="/rooms/<%=@room.id%>/ranking">
+  data-change-page-final-url-second-value="/rooms/<%=@room.id%>/ranking"
+  data-change-page-new-title-value="<%=@new_title%>">
 
   <div class="transition transition-1" data-change-page-target="elementLeft"></div>
 
@@ -24,7 +25,8 @@
 
   <div class="ff-container" data-change-page-target="divToHide">
     <div data-controller="add-username display-button"
-        data-add-username-usernames-value="<%=@user_as_answers_usernames%>">
+        data-add-username-usernames-value="<%=@user_as_answers_usernames%>"
+        data-action="change->display-button#displayButton">
       <%= simple_form_for [@room, @room_question] do |f| %>
         <%= f.association :answers,
             as: :check_boxes,
@@ -38,7 +40,7 @@
             label_method: lambda { |user| cl_image_tag(user.photo.key, :aspect_ratio=>"1.0", :height=>300, :width=>300, crop: "fill", gravity: "faces").html_safe },
             value_method: :id %>
         <div class="container-round-button">
-          <button type="submit" class=<%= @users_with_right_answer.length == 1 ? "questionary-submit-button" : "invisible-button" %> title="Going to next view" data-action="click->change-page#goingNextPageSecondRound" data-change-page-target="button" data-display-button-target="button" data-round="2" >
+          <button type="submit" class=<%= @user_as_answers.length == 0 ? "questionary-submit-button" : "invisible-button" %> title="Going to next view" data-action="click->change-page#goingNextPageSecondRound" data-change-page-target="button" data-display-button-target="button" data-round="2" >
               <i class="fas fa-arrow-right"></i>
           </button>
         </div>

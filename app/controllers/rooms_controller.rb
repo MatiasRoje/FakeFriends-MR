@@ -50,6 +50,10 @@ class RoomsController < ApplicationController
 
   def new_round
     @room = Room.find(params[:room_id])
+
+    # data necessary for displaying the partial in the action cable
+    # view. users_count is hardcoded in the database and get incremented
+    # everything there is a get request on the view of this room
     @room_users = RoomUser.where(room_id: @room).length
     @room.users_count += 1
     @room.save!

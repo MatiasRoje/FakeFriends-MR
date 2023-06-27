@@ -18,6 +18,8 @@ export default class extends Controller {
     // and second to ranking
     finalUrlFirst: String,
     finalUrlSecond: String,
+    // for changing the header and displaying the right answer
+    newTitle: String,
   };
 
   connect() {
@@ -56,21 +58,8 @@ export default class extends Controller {
   secondRoundTemplate(url) {
     setTimeout(() => {
       this.buttonTarget.click();
-      const possibleTitles = [
-        "Let's hope you were right...",
-        "The moment of truth!",
-        "Who expected that?",
-        "And the answer is...",
-        "That was clear!",
-      ];
 
-      // In case the user has pressed the button himself, for the title
-      // not to get changed two times on the same view
-      if (!this.possibleTitles.includes(this.titleTarget.innerHTML)) {
-        this.titleTarget.innerHTML =
-          possibleTitles[Math.floor(Math.random() * possibleTitles.length)];
-      }
-
+      this.titleTarget.innerHTML = this.newTitleValue;
       this.divHiddenTarget.classList.remove("hidden");
       this.divHiddenTarget.classList.add(
         "animate__animated",
@@ -112,16 +101,8 @@ export default class extends Controller {
       window.location.pathname,
       0
     );
-    const possibleTitles = [
-      "Let's hope you were right...",
-      "The moment of truth!",
-      "Who expected that?",
-      "And the answer is...",
-      "That was clear!",
-    ];
 
-    this.titleTarget.innerHTML =
-      possibleTitles[Math.floor(Math.random() * possibleTitles.length)];
+    this.titleTarget.innerHTML = this.newTitleValue;
     this.divHiddenTarget.classList.remove("hidden");
     this.divHiddenTarget.classList.add("animate__animated", "animate__zoomIn");
     this.timerTarget.classList.add("animate__animated", "animate__fadeOutDown");
