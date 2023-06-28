@@ -1,13 +1,9 @@
 // Import page-specific CSS files here.
 @import "home";
-@import "informations";
-@import "ff_home";
-@import "ff_howToPlay";
-@import "ff_login";
-@import "ff_roomShow";
-@import "ff_createRoom";
+@import "login";
+@import "room_show";
 @import "ranking";
 @import "room_questions_show";
-@import "ff_rooms";
-@import "creating_round";
-@import "ff_roomNew";
+@import "rooms";
+@import "new_round";
+@import "room_new";
