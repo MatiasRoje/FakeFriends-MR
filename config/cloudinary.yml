@@ -1,0 +1,15 @@
+development:
+  cloud_name: "ddclmiigj"
+  api_key: "322835769787425"
+  api_secret: "nqYcZ0FEK3pxXL27j-cDPur_8TY"
+  secure: true
+  enhancer: "us_auto"
+  static_image_support: "google_s3"
+
+production:
+  cloud_name: "ddclmiigj"
+  api_key: "322835769787425"
+  api_secret: "nqYcZ0FEK3pxXL27j-cDPur_8TY"
+  secure: true
+  enhancer: "us_auto"
+  static_image_support: "google_s3"
