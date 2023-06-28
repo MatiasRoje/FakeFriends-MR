@@ -1,7 +1,7 @@
 <div class="loading-icon">
-  <% if room_users_count >= @room_users %>
-    <p><%= show_svg('loading.svg') %> <span style="color: #37b24d"><%= @room_users %> /<%= @room_users %></span> users connected...</p>
+  <% if room_users_count.length == @room_users %>
+    <p><%= show_svg('loading.svg') %> <span style="color: #37b24d"><%= room_users_count.length %> /<%= @room_users %></span> users connected...</p>
   <% else %>
-    <p><%= show_svg('loading.svg') %> <%= room_users_count %> /<%= @room_users %> users connected...</p>
+    <p><%= show_svg('loading.svg') %> <%= room_users_count.length %> /<%= @room_users %> users connected...</p>
   <% end %>
 </div>

@@ -93,6 +93,6 @@ fourth_answer.question = fourth_question
 fourth_answer.save!
 
 puts "All done!"
-puts "#{Question.where(round: 1).count} questions were created for the first round. #{Answer.count} were created and are attached to those questions, 4 for question."
+puts "#{Question.where(round: 1).count} questions were created for the first round. #{Answer.count} answers were created and are attached to those questions, 4 for question."
 puts "..."
 puts "Congrats for finishing up the project, keep up the good work!"

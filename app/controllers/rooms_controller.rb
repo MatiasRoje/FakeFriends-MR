@@ -20,7 +20,6 @@ class RoomsController < ApplicationController
     @room = Room.new(room_params)
     @deck = params[:room][:deck]
     @room.user = current_user
-    @room.users_count = 0
     # Generating four digit random code to be used as password for
     # the room
     @room.room_code = 4.times.map{rand(10)}.join
@@ -54,11 +53,13 @@ class RoomsController < ApplicationController
     check_user_permits
 
     # data necessary for displaying the partial in the action cable
-    # view. users_count is hardcoded in the database and get incremented
-    # everything there is a get request on the view of this room
+    # view. users_count is an array column in the room model and the
+    # user get pushed to it when connecting to the view
     @room_users = RoomUser.where(room_id: @room).length
-    @room.users_count += 1
-    @room.save!
+    if !@room.users_count.include? current_user.username
+      @room.users_count << current_user.username
+      @room.save!
+    end
 
     NewRoundChannel.broadcast_to(
       @room,
