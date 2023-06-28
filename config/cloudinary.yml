@@ -1,15 +1,15 @@
 development:
-  cloud_name: "ddclmiigj"
-  api_key: "322835769787425"
-  api_secret: "nqYcZ0FEK3pxXL27j-cDPur_8TY"
+  cloud_name: <%= ENV["CLOUDINARY_CLOUD_NAME"] %>
+  api_key: <%= ENV["CLOUDINARY_API_KEY"] %>
+  api_secret: <%= ENV["CLOUDINARY_API_KEY"] %>
   secure: true
   enhancer: "us_auto"
   static_image_support: "google_s3"
 
 production:
-  cloud_name: "ddclmiigj"
-  api_key: "322835769787425"
-  api_secret: "nqYcZ0FEK3pxXL27j-cDPur_8TY"
+  cloud_name: <%= ENV["CLOUDINARY_CLOUD_NAME"] %>
+  api_key: <%= ENV["CLOUDINARY_API_KEY"] %>
+  api_secret: <%= ENV["CLOUDINARY_API_KEY"] %>
   secure: true
   enhancer: "us_auto"
   static_image_support: "google_s3"
