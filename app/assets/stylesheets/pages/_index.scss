@@ -1,4 +1,5 @@
 // Import page-specific CSS files here.
+@import "general";
 @import "home";
 @import "login";
 @import "room_show";
@@ -7,3 +8,4 @@
 @import "rooms";
 @import "new_round";
 @import "room_new";
+@import "media_queries";
