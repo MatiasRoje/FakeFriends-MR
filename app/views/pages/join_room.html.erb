@@ -11,11 +11,7 @@
       <%= f.input :name, label: true, placeholder: "Enter a room code...", input_html: { value: nil } %>
       <%= f.submit "Join room", class: "ff-btn-form-red extend-button" %>
     <% end %>
-    <% flash.each do |type, msg| %>
-      <div class="alert fade-out">
-        <%= msg %>
-      </div>
-    <% end %>
+    <%= render "shared/flashes" %>
 
   <div class="flex-back-link">
       <%= link_to "<< BACK", root_path, data: { action: "click->transition#pressLinkRight" } %>

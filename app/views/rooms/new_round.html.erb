@@ -14,12 +14,8 @@
       <!-- HERE ACTION CABLE IS GOING TO SYNCHRONIZE, WHEN NEW PLAYER IS ENTERING-->
         <%= render "shared/new_round", room_users_count:  @room.users_count %>
     </div>
-  <%= simple_form_for :user, url: room_create_round_path do |f| %>
+    <%= simple_form_for :user, url: room_create_round_path do |f| %>
       <%= f.submit "Start second round", class: "ff-btn-form-red" %>
-  <% end %>
-  <% if flash[:alert] %>
-    <div class="alert fade-out">
-      <%= flash[:alert] %>
-    </div>
-  <% end %>
+    <% end %>
+    <%= render "shared/flashes" %>
 </div>
