@@ -6,6 +6,17 @@
   <div class="transition transition-2" data-transition-target="elementRight"></div>
   <h2 class="devise-header">Welcome</h2>
 
+  <div class="login-expandable-section" data-controller="expand-card">
+    <button class="login-expand-button animate__animated animate__pulse animate__infinite	infinite" data-expand-card-target="buttonDown"><i class="fa-solid fa-arrow-down" data-action="click->expand-card#expandCard"></i></button>
+    <button class="login-expand-button animate__animated animate__pulse animate__infinite	infinite hidden" data-expand-card-target="buttonUp"><i class="fa-solid fa-arrow-up" data-action="click->expand-card#expandCard"></i></button>
+    <div class="login-expanded-content hidden" data-expand-card-target="expandableContent">
+      <p>For testing the app you can use these three users:</p>
+      <p>pablo@pablo.com / 123456</p>
+      <p>homer@homer.com / 123456</p>
+      <p>harry@harry.com / 123456</p>
+    </div>
+  </div>
+
   <%= simple_form_for(resource, as: resource_name, url: session_path(resource_name)) do |f| %>
     <div class="form-inputs">
       <%= f.input :email,
