@@ -9,11 +9,11 @@
 require "faker"
 require "uri"
 
-puts "Cleaning up the database..."
+# puts "Cleaning up the database..."
 
-User.destroy_all
-Room.destroy_all
-Question.destroy_all
+# User.destroy_all
+# Room.destroy_all
+# Question.destroy_all
 
 puts "Creating three users for development..."
 
