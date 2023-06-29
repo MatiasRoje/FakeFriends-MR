@@ -1,0 +1,90 @@
+/**************************/
+/* BELOW 850px (Mobile view) */
+/**************************/
+// Actually modified for a 550px view
+
+@media (max-width: 53em) {
+  // room_new
+  .ff-title-medium {
+    padding-top: 25px;
+  }
+
+  .card-decks {
+    grid-template-columns: 1fr;
+  }
+
+  form {
+    padding-bottom: 30px;
+  }
+
+  // join_room
+  .extend-button {
+    width: 350px;
+  }
+
+  // about
+  .home-container {
+    max-width: 350px;
+  }
+
+  // rooms
+  .ff-rooms-container {
+    max-width: 350px;
+  }
+
+  .ff-grid-rooms {
+    margin-top: 10px;
+  }
+
+  // show_room
+  .ff-title-large {
+    margin-top: 30px;
+  }
+
+  .room-code {
+    margin-bottom: 30px;
+  }
+
+  .ff-room-show-flex {
+    max-width: 350px;
+  }
+
+  .flex-btn-landing {
+    align-items: center;
+  }
+
+  // new_round
+  .ff-container {
+    max-width: 350px;
+  }
+
+  .ff-title-new-round {
+    margin-top: 30px;
+  }
+
+  #game-board {
+    margin: 60px 0 60px 0;
+  }
+
+  // ranking
+  #chat-container {
+    max-width: 350px;
+  }
+
+  .ff-ranking-grid {
+    gap: 30px;
+  }
+
+  #emoji-panel {
+    gap: 5px;
+  }
+
+  .ff-ranking-grid {
+    grid-template-columns: 1fr;
+    margin: 30px 0 30px 0;
+  }
+
+  .ff-ranking-card-name {
+    margin-bottom: 0;
+  }
+}

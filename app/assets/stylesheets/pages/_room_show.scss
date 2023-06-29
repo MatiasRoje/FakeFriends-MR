@@ -1,5 +1,6 @@
 .room-code {
   text-align: center;
+  font-size: 24px;
 }
 
 .waiting {
@@ -32,7 +33,7 @@
 .avatar-container {
   display: flex;
   justify-content: center;
-  margin: 0px 20px;
+  margin: 30px 20px;
 }
 
 .flex-loader {
@@ -51,22 +52,10 @@
 }
 
 // Flex Box Page
-.ff-flex-page {
+.ff-room-show-flex {
   display: flex;
-  flex: 1;
+  flex-direction: column;
+  justify-content: space-between;
   width: 800px;
-  margin: 0 auto;
-  flex-direction: column;
-  justify-content: space-between;
-  padding: 65px 0;
-}
-
-.ff-info-container {
-  display: flex;
-  flex-direction: column;
-  flex: 1;
-  justify-content: space-between;
-  margin-top: 15px;
-  padding-bottom: 0px;
-  padding-top: 50px;
+  margin: 50px auto;
 }

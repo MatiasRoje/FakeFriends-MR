@@ -1,1 +1,19 @@
-// Specific CSS for your home-page
+.logo {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 20px;
+}
+
+.logo img {
+  width: 250px;
+  height: auto;
+  transform: translateX(-7%);
+}
+
+.flex-btn-landing {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  margin: 0px 50px 0px 50px;
+}

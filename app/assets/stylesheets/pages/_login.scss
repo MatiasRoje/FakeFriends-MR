@@ -1,0 +1,45 @@
+.devise-header {
+  text-align: center;
+  font-size: 3em;
+  padding-top: 80px;
+  animation: backInRight;
+  animation-duration: 1s;
+}
+
+.form-inputs {
+  margin-top: 60px;
+  color: #f4f1ff;
+}
+
+.form-check .form-check-input {
+  display: flex;
+  margin-left: 0;
+  margin-right: 10px;
+}
+
+.login-expandable-section {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  align-items: center;
+  justify-content: center;
+}
+
+.login-expand-button {
+  color: #fff;
+  font-size: 20px;
+  background: none;
+  border: none;
+}
+
+.login-expanded-content {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: -40px;
+
+  p {
+    font-size: 14px;
+  }
+}

@@ -5,7 +5,7 @@
 
 
 
-<div class="ff-container home-body" data-controller="transition select-deck">
+<div class="ff-container home-container" data-controller="transition select-deck">
   <div class="transition transition-1" data-transition-target="elementLeft"></div>
   <div class="transition transition-2" data-transition-target="elementRight"></div>
     <h2 class="ff-title-medium">Host a game</h2>
@@ -33,7 +33,7 @@
             <h3>FakeFriends</h3>
           </div>
           <div class="card-deck-content">
-            <p>Uncover the truth about about your friendships with this exciting game that promises to reveal the true bonds that connects you and your friends.</p>
+            <p>Uncover the truth about about your friendships with this exciting game that promises to reveal the true bond that connects you and your friends.</p>
             <span>10 questions</span>
           </div>
         </label>
@@ -48,11 +48,7 @@
 
       <button type="submit" class="ff-btn-form-red">Start game</button>
     </form>
-    <% flash.each do |type, msg| %>
-      <div class="alert fade-out">
-        <%= msg %>
-      </div>
-    <% end %>
+    <%= render "shared/flashes" %>
 
   <div class="flex-back-link">
     <%= link_to "<< BACK", root_path, data: { action: "click->transition#pressLinkRight" } %>

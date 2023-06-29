@@ -17,17 +17,20 @@ Question.destroy_all
 
 puts "Creating three users for development..."
 
-# user1 = User.new(username: "Pablo", email: "pablo@pablo.com", password: "123456")
-# user1.photo.attach(io: "app/assets/images/Pablo_Escobar_Mug.jpeg", filename: "file_name")
-# user1.save!
+user1 = User.new(username: "Pablo", email: "pablo@pablo.com", password: "123456")
+file = URI.open("https://res.cloudinary.com/ddclmiigj/image/upload/v1687945948/Pablo_Escobar_Mug_fpxomt.jpg")
+user1.photo.attach(io: file, filename: "file_name")
+user1.save!
 
-# user2 = User.new(username: "Homer", email: "homer@homer.com", password: "123456")
-# user2.photo.attach(io: "app/assets/images/Homer_Simpson.webp", filename: "file_name")
-# user2.save!
+user2 = User.new(username: "Homer", email: "homer@homer.com", password: "123456")
+file = URI.open("https://res.cloudinary.com/ddclmiigj/image/upload/v1687945553/Homer_Simpson_kbnlct.webp")
+user2.photo.attach(io: file, filename: "file_name")
+user2.save!
 
-# user3 = User.new(username: "Harry", email: "harry@harry.com", password: "123456")
-# user3.photo.attach(io: "app/assets/images/Harry_Potter.jpeg", filename: "file_name")
-# user3.save!
+user3 = User.new(username: "Harry", email: "harry@harry.com", password: "123456")
+file = URI.open("https://res.cloudinary.com/ddclmiigj/image/upload/v1687945870/Harry_Potter_z78rul.jpg")
+user3.photo.attach(io: file, filename: "file_name")
+user3.save!
 
 puts "#{User.count} users were created."
 puts "..."
@@ -90,6 +93,6 @@ fourth_answer.question = fourth_question
 fourth_answer.save!
 
 puts "All done!"
-puts "#{Question.where(round: 1).count} questions were created for the first round. #{Answer.count} were created and are attached to those questions, 4 for question."
+puts "#{Question.where(round: 1).count} questions were created for the first round. #{Answer.count} answers were created and are attached to those questions, 4 for question."
 puts "..."
 puts "Congrats for finishing up the project, keep up the good work!"

@@ -5,6 +5,7 @@
 <div class="ff-rooms-container" data-controller="transition">
   <div class="transition transition-2" data-transition-target="elementRight"></div>
 
+    <%= render "shared/flashes" %>
     <% if @all_rooms_where_user_played.empty? %>
       <h2 class="ff-title-rooms ff-margin-v-50">No games played...</h2>
       <div class="flex-btn-landing">
