@@ -1,6 +1,10 @@
-body {
-  height: 100vh;
+html {
+  min-height: 100%; /* make sure it is at least as tall as the viewport */
   position: relative;
+}
+
+body {
+  height: 100%; /* force the BODY element to match the height of the HTML element */
 }
 
 .ff-background {
@@ -9,7 +13,11 @@ body {
   background: #070415;
   background-position: center;
   background-size: cover;
-  height: 100vh;
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
 }
 
 a {
