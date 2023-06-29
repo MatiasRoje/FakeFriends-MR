@@ -71,17 +71,22 @@
     max-width: 350px;
   }
 
+  .ff-title-ranking {
+    padding-top: 20px;
+  }
+
   .ff-ranking-grid {
     gap: 30px;
   }
 
   #emoji-panel {
     gap: 5px;
+    margin-bottom: -40px;
   }
 
   .ff-ranking-grid {
     grid-template-columns: 1fr;
-    margin: 30px 0 30px 0;
+    margin: 20px 0 20px 0;
   }
 
   .ff-ranking-card-name {
