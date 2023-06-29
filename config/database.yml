@@ -81,6 +81,4 @@ test:
 #
 production:
   <<: *default
-  database: rails_authentication_production
-  username: rails_authentication
-  password: <%= ENV["RAILS_AUTHENTICATION_DATABASE_PASSWORD"] %>
+  url: <%= ENV['DATABASE_URL'] %>
