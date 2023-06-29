@@ -11,6 +11,12 @@
   color: #f4f1ff;
 }
 
+.form-check .form-check-input {
+  display: flex;
+  margin-left: 0;
+  margin-right: 10px;
+}
+
 .login-expandable-section {
   display: flex;
   flex-direction: column;
