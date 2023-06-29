@@ -1,18 +1,18 @@
 databases:
-  - name: FakeFriends
-    databaseName: FakeFriends
-    user: FakeFriends
+  - name: fakefriends
+    databaseName: fakefriends
+    user: fakefriends
 
 services:
   - type: web
-    name: FakeFriends
+    name: fakefriends
     runtime: ruby
     buildCommand: "./bin/render-build.sh"
     startCommand: "bundle exec puma -C config/puma.rb"
     envVars:
       - key: DATABASE_URL
         fromDatabase:
-          name: FakeFriends
+          name: fakefriends
           property: connectionString
       - key: RAILS_MASTER_KEY
         sync: false
