@@ -7,7 +7,15 @@
     <p class="ff-title-new-round ">Waiting room</p>
 
     <div id="game-board" data-controller=snake>
-      <canvas id="canvas" width="380" height="380" data-snake-target="canvas"></canvas>
+      <canvas id="canvas" width="360" height="360" data-snake-target="canvas"></canvas>
+      <div class="direction-controls">
+        <button data-snake-target="up"><i class="fas fa-arrow-up"></i></button>
+        <div>
+          <button data-snake-target="left"><i class="fas fa-arrow-left"></i></button>
+          <button data-snake-target="right"><i class="fas fa-arrow-right"></i></button>
+        </div>
+        <button data-snake-target="down"><i class="fas fa-arrow-down"></i></button>
+      </div>
     </div>
 
     <div class="loading-information" data-controller="new-round-subscription" data-new-round-subscription-room-id-value="<%= @room.id %>" data-new-round-subscription-target="users">
