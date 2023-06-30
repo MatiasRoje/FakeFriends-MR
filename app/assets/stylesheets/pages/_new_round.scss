@@ -4,8 +4,8 @@
   align-items: center;
   justify-content: center;
   gap: 5px;
-  margin-top: 30px;
-  margin-bottom: -10px;
+  margin-top: 20px;
+  margin-bottom: -20px;
 
   p {
     font-style: italic;
@@ -23,12 +23,45 @@
 
 #game-board {
   display: flex;
+  flex-direction: column;
   justify-content: center;
   align-items: center;
+  gap: 20px;
 }
 
 canvas {
   border: 1px solid #fff;
   position: relative;
   z-index: 10;
+}
+
+.direction-controls {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  // border: 1px solid #fff;
+  // border-radius: 50%;
+  gap: 0; /* Reduce gap */
+}
+
+.direction-controls div {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 80px; /* Reduce width */
+  margin-top: -8px;
+  margin-bottom: -8px;
+}
+
+.direction-controls button {
+  background: none;
+  border: none;
+  cursor: pointer;
+  color: white;
+  font-size: 20px;
+}
+
+.direction-controls button:focus {
+  outline: none;
 }

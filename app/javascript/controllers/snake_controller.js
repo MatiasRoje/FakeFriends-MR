@@ -2,7 +2,7 @@ import { Controller } from "@hotwired/stimulus";
 
 // Connects to data-controller="snake"
 export default class extends Controller {
-  static targets = ["canvas"];
+  static targets = ["canvas", "up", "down", "left", "right"];
 
   connect() {
     this.scale = 20;
@@ -33,7 +33,7 @@ export default class extends Controller {
     this.fruit.pickLocation();
 
     this.bindKeyEvents();
-    this.bindTouchEvents();
+    this.bindClickEvents();
 
     setInterval(() => {
       this.clearCanvas();
@@ -56,40 +56,37 @@ export default class extends Controller {
     });
   }
 
-  bindTouchEvents() {
-    this.canvas.addEventListener("touchstart", (event) => {
-      const firstTouch = event.touches[0];
-      this.xDown = firstTouch.clientX;
-      this.yDown = firstTouch.clientY;
+  bindClickEvents() {
+    this.upTarget.addEventListener("click", () => {
+      this.snake.changeDirection("Up");
+      this.changeButtonColor(this.upTarget);
     });
 
-    this.canvas.addEventListener("touchmove", (event) => {
-      if (!this.xDown || !this.yDown) {
-        return;
-      }
-
-      const xUp = event.touches[0].clientX;
-      const yUp = event.touches[0].clientY;
-      const xDiff = this.xDown - xUp;
-      const yDiff = this.yDown - yUp;
-
-      if (Math.abs(xDiff) > Math.abs(yDiff)) {
-        if (xDiff > 0) {
-          this.snake.changeDirection("Left");
-        } else {
-          this.snake.changeDirection("Right");
-        }
-      } else {
-        if (yDiff > 0) {
-          this.snake.changeDirection("Up");
-        } else {
-          this.snake.changeDirection("Down");
-        }
-      }
-
-      this.xDown = null;
-      this.yDown = null;
+    this.downTarget.addEventListener("click", () => {
+      this.snake.changeDirection("Down");
+      this.changeButtonColor(this.downTarget);
     });
+
+    this.leftTarget.addEventListener("click", () => {
+      this.snake.changeDirection("Left");
+      this.changeButtonColor(this.leftTarget);
+    });
+
+    this.rightTarget.addEventListener("click", () => {
+      this.snake.changeDirection("Right");
+      this.changeButtonColor(this.rightTarget);
+    });
+  }
+
+  changeButtonColor(button) {
+    const originalColor = button.style.color;
+    button.style.color = "#37b24d";
+    button.style.transform = "scale(1.2)";
+
+    setTimeout(() => {
+      button.style.color = originalColor;
+      button.style.transform = "scale(1)";
+    }, 200); // change back to original color after 200ms
   }
 
   clearCanvas() {
