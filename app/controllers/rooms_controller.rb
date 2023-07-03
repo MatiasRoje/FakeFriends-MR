@@ -92,7 +92,7 @@ class RoomsController < ApplicationController
             question.round = 2
             question.save!
             # Setting the answer as the right answer of the room
-            right_answer = Answer.new(content: answer.answer.content, plural: answer.answer.plural)
+            right_answer = Answer.new(content: answer.answer.content, plural: answer.answer.plural, capital: answer.answer.capital)
             right_answer.room_question = question
             right_answer.save
           end

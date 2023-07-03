@@ -7,9 +7,9 @@
 
 # # puts "Cleaning up the database..."
 
-# # User.destroy_all
-# # Room.destroy_all
-# # Question.destroy_all
+# User.destroy_all
+# Room.destroy_all
+# Question.destroy_all
 
 # puts "Creating three users for development..."
 
@@ -147,17 +147,17 @@ fourth_answer = Answer.new(content: "C++", capital: true)
 fourth_answer.question = new_question
 fourth_answer.save!
 
-new_question = Question.create(content: "What's something you can't live without?", round: 1, key_words: "most valuable thing", deck: "fakefriends")
-first_answer = Answer.new(content: "Cellphones", plural: true)
+new_question = Question.create(content: "What annoys you the most?", round: 1, key_words: "biggest annoyance", deck: "fakefriends")
+first_answer = Answer.new(content: "People talking during a movie", plural: true)
 first_answer.question = new_question
 first_answer.save!
-second_answer = Answer.new(content: "Videogames", plural: true)
+second_answer = Answer.new(content: "Impunctuality")
 second_answer.question = new_question
 second_answer.save!
-third_answer = Answer.new(content: "Parties", plural: true)
+third_answer = Answer.new(content: "Sundays", plural: true)
 third_answer.question = new_question
 third_answer.save!
-fourth_answer = Answer.new(content: "Books", plural: true)
+fourth_answer = Answer.new(content: "Missing a sock while doing laundry")
 fourth_answer.question = new_question
 fourth_answer.save!
 
@@ -245,8 +245,8 @@ fourth_answer = Answer.new(content: "My Way", capital: true)
 fourth_answer.question = new_question
 fourth_answer.save!
 
-new_question = Question.create(content: "If you could be friends with a famous person, who would you choose", round: 1, key_words: "most admired celebrity", deck: "fakefriends")
-first_answer = Answer.new(content: "the Pope", capital: true)
+new_question = Question.create(content: "If you could be friends with a famous person, who would you choose?", round: 1, key_words: "most admired celebrity", deck: "fakefriends")
+first_answer = Answer.new(content: "The Pope", capital: true)
 first_answer.question = new_question
 first_answer.save!
 second_answer = Answer.new(content: "Angela Merkel", capital: true)
@@ -286,3 +286,7 @@ third_answer.save!
 fourth_answer = Answer.new(content: "Quitting work")
 fourth_answer.question = new_question
 fourth_answer.save!
+
+
+puts "Fakefriends deck added. #{Question.where(deck: "fakefriends").length} questions with 4 answers attached per question."
+puts "Prototype is ready. Congrats!"
