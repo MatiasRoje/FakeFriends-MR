@@ -19,6 +19,11 @@ class RoomsController < ApplicationController
   def create
     @room = Room.new(room_params)
     @deck = params[:room][:deck]
+    if !@deck
+      flash.now[:alert] = "You need to choose a deck!"
+      render :new, status: :unprocessable_entity
+      return
+    end
     @room.user = current_user
     # Generating four digit random code to be used as password for
     # the room
@@ -87,7 +92,7 @@ class RoomsController < ApplicationController
             question.round = 2
             question.save!
             # Setting the answer as the right answer of the room
-            right_answer = Answer.new(content: answer.answer.content, plural: answer.answer.plural)
+            right_answer = Answer.new(content: answer.answer.content, plural: answer.answer.plural, capital: answer.answer.capital)
             right_answer.room_question = question
             right_answer.save
           end

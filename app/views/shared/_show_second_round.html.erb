@@ -5,7 +5,7 @@
 
   <div class="transition transition-1" data-change-page-target="elementLeft"></div>
 
-  <h2 class="ff-title-round-2 mt-5 mx-3" data-change-page-target="title">Whose <%= @room_question.question.key_words %> <%= @right_answer.first.plural ? "are" : "is"%> <%= @right_answer.first.content.downcase %>?</h2>
+  <h2 class="ff-title-round-2 mt-5 mx-3" data-change-page-target="title">Whose <%= @room_question.question.key_words %> <%= @right_answer.first.plural ? "are" : "is"%> <%= @right_answer.first.capital ? @right_answer.first.content : @right_answer.first.content.downcase %>?</h2>
 
   <%= render "shared/timer_navbar" %>
 
