@@ -52,7 +52,7 @@ export default class extends Controller {
         this.buttonTarget.click();
         window.location = url;
       }, 300);
-    }, 10000);
+    }, 20000);
   }
 
   secondRoundTemplate(url) {
@@ -76,7 +76,7 @@ export default class extends Controller {
           window.location = url;
         }, 300);
       }, 5000);
-    }, 10000);
+    }, 20000);
   }
 
   goingNextPageFirstRound() {
