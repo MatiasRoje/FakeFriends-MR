@@ -9,12 +9,13 @@
   <div class="transition transition-1" data-transition-target="elementLeft"></div>
   <div class="transition transition-2" data-transition-target="elementRight"></div>
     <h2 class="ff-title-medium">Host a game</h2>
+    <p class="new-room-decks-info">Please choose a deck:</p>
     <form action="/rooms" method="post">
       <div class="form-group">
         <label>Game Deck:</label>
         <div class="card-decks">
           <label for="devs" class="card-deck" data-select-deck-target="deckButton" data-action="change->select-deck#selectDeck">
-          <input type="radio" id="devs" name="room[deck]" value="devs" required>
+          <input type="radio" id="devs" name="room[deck]" value="devs">
           <!-- Card content for deck 1 -->
           <%= image_tag "devdeck.jpg", alt:"Developer Deck" %>
           <div class="card-deck-title">
@@ -26,7 +27,7 @@
           </div>
           </label>
           <label for="fakefriends" class="card-deck" data-select-deck-target="deckButton" data-action="change->select-deck#selectDeck">
-          <input type="radio" id="fakefriends" name="room[deck]" value="fakefriends" required>
+          <input type="radio" id="fakefriends" name="room[deck]" value="fakefriends">
           <!-- Card content for deck 2 -->
           <%= image_tag "fakefriends-deck.jpg", alt:"Fakefriends Deck" %>
           <div class="card-deck-title">
