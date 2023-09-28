@@ -7,13 +7,14 @@
   <h2 class="devise-header">Welcome</h2>
 
   <div class="login-expandable-section" data-controller="expand-card">
-    <button class="login-expand-button animate__animated animate__pulse animate__infinite	infinite" data-expand-card-target="buttonDown"><i class="fa-solid fa-arrow-down" data-action="click->expand-card#expandCard"></i></button>
-    <button class="login-expand-button animate__animated animate__pulse animate__infinite	infinite hidden" data-expand-card-target="buttonUp"><i class="fa-solid fa-arrow-up" data-action="click->expand-card#expandCard"></i></button>
-    <div class="login-expanded-content hidden" data-expand-card-target="expandableContent">
-      <p>For testing the app you can use these three users:</p>
-      <p>pablo@pablo.com / 123456</p>
-      <p>homer@homer.com / 123456</p>
-      <p>harry@harry.com / 123456</p>
+    <button class="login-expand-button animate__animated animate__pulse animate__infinite	infinite hidden" data-expand-card-target="buttonDown"><i class="fa-solid fa-arrow-down" data-action="click->expand-card#expandCard"></i></button>
+    <button class="login-expand-button animate__animated animate__pulse animate__infinite	infinite" data-expand-card-target="buttonUp"><i class="fa-solid fa-arrow-up" data-action="click->expand-card#expandCard"></i></button>
+    <div class="login-expanded-content" data-expand-card-target="expandableContent">
+      <p>For testing the app you can use these users:</p>
+      <p>pablo@pablo.com — 123456</p>
+      <p>homer@homer.com — 123456</p>
+      <p>harry@harry.com — 123456</p>
+      <p>(You will need at least two users to play the game)</p>
     </div>
   </div>
 
@@ -22,10 +23,10 @@
       <%= f.input :email,
                   required: false,
                   autofocus: true,
-                  input_html: { autocomplete: "email" } %>
+                  input_html: { autocomplete: "email", value: "pablo@pablo.com" } %>
       <%= f.input :password,
                   required: false,
-                  input_html: { autocomplete: "current-password" } %>
+                  input_html: { autocomplete: "current-password", value: "123456" } %>
       <%= f.input :remember_me, as: :boolean if devise_mapping.rememberable? %>
     </div>
 
