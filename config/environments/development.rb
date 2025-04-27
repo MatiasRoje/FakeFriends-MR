@@ -70,4 +70,8 @@ Rails.application.configure do
 
   # Devise
   config.action_mailer.default_url_options = { host: "localhost", port: 3000 }
+
+  # Redis
+  config.redis_host = ENV.fetch("REDIS_HOST", "localhost")
+  config.redis_port = ENV.fetch("REDIS_PORT", 6379)
 end
