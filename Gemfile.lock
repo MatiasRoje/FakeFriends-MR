@@ -276,12 +276,13 @@ GEM
 
 PLATFORMS
   arm64-darwin-21
+  arm64-darwin-24
   x86_64-darwin-20
   x86_64-linux
 
 DEPENDENCIES
   autoprefixer-rails
-  axios_rails (~> 0.7.0)
+  axios_rails
   bootsnap
   capybara
   cloudinary
@@ -289,13 +290,13 @@ DEPENDENCIES
   devise
   dotenv-rails
   faker
-  font-awesome-sass (~> 6.1)
+  font-awesome-sass
   jbuilder
   jsbundling-rails
-  pg (~> 1.1)
-  puma (~> 5.0)
-  rails (~> 7.0.4, >= 7.0.4.2)
-  redis (~> 4.0)
+  pg
+  puma
+  rails
+  redis
   sassc-rails
   selenium-webdriver
   simple_form!
