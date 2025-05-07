@@ -84,4 +84,6 @@ test:
 #
 production:
   <<: *default
+  database: <%= ENV.fetch('POSTGRES_DB', 'rails_authentication_production') %>
   url: <%= ENV['DATABASE_URL'] %>
+  pool: <%= ENV.fetch("RAILS_MAX_THREADS") { 25 } %>

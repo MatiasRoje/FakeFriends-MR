@@ -31,7 +31,7 @@ SimpleForm.setup do |config|
   # collection wrappers.
   config.include_default_input_wrapper_class = false
 
-  # THIS WAS SET OFF BY FAKE-FRIENDS!!!
+  # THIS WAS SET OFF BY FAKEFRIENDS!!!
   # CSS class to add for error notification helper.
   # config.error_notification_class = 'alert alert-danger'
 

@@ -1,0 +1,106 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: {{ include "fakefriends.fullname" . }}
+  labels:
+    {{- include "fakefriends.labels" . | nindent 4 }}
+spec:
+  {{- if not .Values.autoscaling.enabled }}
+  replicas: {{ .Values.replicaCount }}
+  {{- end }}
+  selector:
+    matchLabels:
+      {{- include "fakefriends.selectorLabels" . | nindent 6 }}
+  template:
+    metadata:
+      {{- with .Values.podAnnotations }}
+      annotations:
+        {{- toYaml . | nindent 8 }}
+      {{- end }}
+      labels:
+        {{- include "fakefriends.labels" . | nindent 8 }}
+        {{- with .Values.podLabels }}
+        {{- toYaml . | nindent 8 }}
+        {{- end }}
+    spec:
+      {{- with .Values.imagePullSecrets }}
+      imagePullSecrets:
+        {{- toYaml . | nindent 8 }}
+      {{- end }}
+      serviceAccountName: {{ include "fakefriends.serviceAccountName" . }}
+      {{- with .Values.podSecurityContext }}
+      securityContext:
+        {{- toYaml . | nindent 8 }}
+      {{- end }}
+      containers:
+        - name: {{ .Chart.Name }}
+          {{- with .Values.securityContext }}
+          securityContext:
+            {{- toYaml . | nindent 12 }}
+          {{- end }}
+          image: "{{ .Values.image.repository }}:{{ .Values.image.tag | default .Chart.AppVersion }}"
+          imagePullPolicy: {{ .Values.image.pullPolicy }}
+          ports:
+            - name: http
+              containerPort: {{ .Values.service.port }}
+              protocol: TCP
+          env:
+            - name: CLOUDINARY_URL
+              value: {{ .Values.env.CLOUDINARY_URL }}
+            - name: RAILS_ENV
+              value: {{ .Values.env.RAILS_ENV }}
+            - name: RAILS_LOG_TO_STDOUT
+              value: {{ .Values.env.RAILS_LOG_TO_STDOUT }}
+            - name: RAILS_MAX_THREADS
+              value: {{ .Values.env.RAILS_MAX_THREADS }}
+            - name: DATABASE_URL
+              value: {{ .Values.db.DATABASE_URL }}
+            - name: POSTGRES_DB
+              value: {{ .Values.db.POSTGRES_DB }}
+            - name: DATABASE_HOST
+              value: {{ .Values.db.DATABASE_HOST }}
+            - name: DATABASE_USER
+              value: {{ .Values.db.DATABASE_USER }}
+            - name: DATABASE_PASSWORD
+              valueFrom:
+                secretKeyRef:
+                  name: {{ include "fakefriends.fullname" . }}-db-secret
+                  key: postgres-password
+            - name: REDIS_URL
+              value: {{ .Values.redis.REDIS_URL }}
+            - name: REDIS_HOST
+              value: {{ .Values.redis.REDIS_HOST }}
+            - name: REDIS_PORT
+              value: {{ .Values.redis.REDIS_PORT }}              
+          {{- with .Values.livenessProbe }}
+          livenessProbe:
+            {{- toYaml . | nindent 12 }}
+          {{- end }}
+          {{- with .Values.readinessProbe }}
+          readinessProbe:
+            {{- toYaml . | nindent 12 }}
+          {{- end }}
+          {{- with .Values.resources }}
+          resources:
+            {{- toYaml . | nindent 12 }}
+          {{- end }}
+          {{- with .Values.volumeMounts }}
+          volumeMounts:
+            {{- toYaml . | nindent 12 }}
+          {{- end }}
+      {{- with .Values.volumes }}
+      volumes:
+        {{- toYaml . | nindent 8 }}
+      {{- end }}
+      {{- with .Values.nodeSelector }}
+      nodeSelector:
+        {{- toYaml . | nindent 8 }}
+      {{- end }}
+      {{- with .Values.affinity }}
+      affinity:
+        {{- toYaml . | nindent 8 }}
+      {{- end }}
+      {{- with .Values.tolerations }}
+      tolerations:
+        {{- toYaml . | nindent 8 }}
+      {{- end }}
