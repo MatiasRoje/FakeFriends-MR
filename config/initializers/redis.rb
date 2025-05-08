@@ -1,24 +1,21 @@
 require 'redis'
 
 begin
-  redis_config = {
-    host: Rails.configuration.redis_host,
-    port: Rails.configuration.redis_port
-  }
-  
-  # For Kubernetes with service discovery
   if ENV['KUBERNETES_SERVICE_HOST'].present?
-    # Use service DNS name if in Kubernetes
-    url = ENV.fetch('REDIS_URL', "redis://#{Rails.configuration.redis_host}:#{Rails.configuration.redis_port}/0")
+    # In Kubernetes, use the provided REDIS_URL which should point to the service
+    url = ENV.fetch('REDIS_URL')
     $redis = Redis.new(url: url)
+    Rails.logger.info "Connected to Redis in Kubernetes at #{url}"
   else
-    # For local development
-    $redis = Redis.new(redis_config)
+    # For local development, use host and port
+    redis_host = ENV.fetch('REDIS_HOST', 'localhost')
+    redis_port = ENV.fetch('REDIS_PORT', '6379')
+    $redis = Redis.new(host: redis_host, port: redis_port)
+    Rails.logger.info "Connected to Redis locally at #{redis_host}:#{redis_port}"
   end
   
   # Test connection
   $redis.ping
-  Rails.logger.info "Connected to Redis at #{Rails.configuration.redis_host}:#{Rails.configuration.redis_port}"
 rescue Redis::CannotConnectError => e
   Rails.logger.error "Failed to connect to Redis: #{e.message}"
   # You can use a null Redis implementation for development if needed

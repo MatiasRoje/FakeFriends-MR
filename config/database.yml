@@ -21,7 +21,7 @@ default: &default
   # https://guides.rubyonrails.org/configuring.html#database-pooling
   pool: <%= ENV.fetch("RAILS_MAX_THREADS") { 5 } %>
   host: <%= ENV.fetch("DATABASE_HOST") { "db" } %>
-  username: <%= ENV.fetch("DATABASE_USERNAME") { "postgres" } %>
+  username: <%= ENV.fetch("DATABASE_USER") { "postgres" } %>
   password: <%= ENV.fetch("DATABASE_PASSWORD") { "password" } %>
 
 development:
@@ -85,5 +85,9 @@ test:
 production:
   <<: *default
   database: <%= ENV.fetch('POSTGRES_DB', 'rails_authentication_production') %>
-  url: <%= ENV['DATABASE_URL'] %>
+  host: <%= ENV.fetch("DATABASE_HOST", "postgresql") %>
+  username: <%= ENV.fetch("DATABASE_USER", "postgres") %>
+  password: <%= ENV.fetch("DATABASE_PASSWORD") %>
   pool: <%= ENV.fetch("RAILS_MAX_THREADS") { 25 } %>
+  # Only use DATABASE_URL if it's explicitly set
+  url: <%= ENV['DATABASE_URL'] if ENV['DATABASE_URL'].present? %>

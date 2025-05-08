@@ -1,3 +1,4 @@
+---
 apiVersion: apps/v1
 kind: Deployment
 metadata:
@@ -46,32 +47,32 @@ spec:
               protocol: TCP
           env:
             - name: CLOUDINARY_URL
-              value: {{ .Values.env.CLOUDINARY_URL }}
+              value: {{ .Values.env.CLOUDINARY_URL | quote }}
             - name: RAILS_ENV
-              value: {{ .Values.env.RAILS_ENV }}
+              value: {{ .Values.env.RAILS_ENV | quote }}
             - name: RAILS_LOG_TO_STDOUT
-              value: {{ .Values.env.RAILS_LOG_TO_STDOUT }}
+              value: {{ .Values.env.RAILS_LOG_TO_STDOUT | quote }}
             - name: RAILS_MAX_THREADS
-              value: {{ .Values.env.RAILS_MAX_THREADS }}
+              value: {{ .Values.env.RAILS_MAX_THREADS | quote }}
             - name: DATABASE_URL
-              value: {{ .Values.db.DATABASE_URL }}
+              value: {{ .Values.db.DATABASE_URL | quote }}
             - name: POSTGRES_DB
-              value: {{ .Values.db.POSTGRES_DB }}
+              value: {{ .Values.db.POSTGRES_DB | quote }}
             - name: DATABASE_HOST
-              value: {{ .Values.db.DATABASE_HOST }}
+              value: {{ .Values.db.DATABASE_HOST | quote }}
             - name: DATABASE_USER
-              value: {{ .Values.db.DATABASE_USER }}
+              value: {{ .Values.db.DATABASE_USER | quote }}
             - name: DATABASE_PASSWORD
               valueFrom:
                 secretKeyRef:
                   name: {{ include "fakefriends.fullname" . }}-db-secret
                   key: postgres-password
             - name: REDIS_URL
-              value: {{ .Values.redis.REDIS_URL }}
+              value: {{ .Values.redis.REDIS_URL | quote }}
             - name: REDIS_HOST
-              value: {{ .Values.redis.REDIS_HOST }}
+              value: {{ .Values.redis.REDIS_HOST | quote }}
             - name: REDIS_PORT
-              value: {{ .Values.redis.REDIS_PORT }}              
+              value: {{ .Values.redis.REDIS_PORT | quote }}
           {{- with .Values.livenessProbe }}
           livenessProbe:
             {{- toYaml . | nindent 12 }}

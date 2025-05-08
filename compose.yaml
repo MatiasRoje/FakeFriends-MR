@@ -9,6 +9,11 @@ services:
       POSTGRES_DB: rails_authentication_development
     ports:
       - "5432:5432"
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U postgres"]
+      interval: 5s
+      timeout: 5s
+      retries: 5
 
   redis:
     image: redis:7
@@ -16,6 +21,40 @@ services:
       - "6379:6379"
     volumes:
       - redis_data:/data
+    healthcheck:
+      test: ["CMD", "redis-cli", "ping"]
+      interval: 5s
+      timeout: 5s
+      retries: 5
+
+  db-init:
+    build: .
+    command: >
+      bash -c "
+        echo 'Waiting for PostgreSQL...' &&
+        until PGPASSWORD=password psql -h db -U postgres -c 'SELECT 1' > /dev/null 2>&1; do
+          echo 'PostgreSQL unavailable - sleeping';
+          sleep 1;
+        done &&
+        echo 'PostgreSQL is up - initializing database' &&
+        bundle exec rails db:drop db:create db:migrate db:seed
+      "
+    environment:
+      DATABASE_URL: postgres://postgres:password@db:5432/rails_authentication_development
+      DATABASE_HOST: db
+      DATABASE_PORT: 5432
+      DATABASE_USER: postgres
+      DATABASE_PASSWORD: password
+      POSTGRES_DB: rails_authentication_development
+      RAILS_ENV: development
+      REDIS_URL: redis://redis:6379/0
+      ALLOW_DB_DROP: "true"
+      CLOUDINARY_URL: "${CLOUDINARY_URL}"
+    depends_on:
+      db:
+        condition: service_healthy
+      redis:
+        condition: service_healthy
 
   web:
     build: .
@@ -25,14 +64,30 @@ services:
     ports:
       - "3000:3000"
     depends_on:
-      - db
-      - redis
+      db-init:
+        condition: service_completed_successfully
     environment:
+      # Database configuration
       DATABASE_URL: postgres://postgres:password@db:5432/rails_authentication_development
+      DATABASE_HOST: db
+      DATABASE_PORT: 5432
+      DATABASE_USER: postgres
+      DATABASE_PASSWORD: password
+      POSTGRES_DB: rails_authentication_development
+      
+      # Redis configuration
       REDIS_HOST: redis
       REDIS_PORT: 6379
       REDIS_URL: redis://redis:6379/0
-      CLOUDINARY_URL: ${CLOUDINARY_URL}
+      
+      # Rails configuration
+      RAILS_ENV: development
+      RAILS_LOG_TO_STDOUT: "true"
+      RAILS_MAX_THREADS: "5"
+      
+      # Other configuration
+      CLOUDINARY_URL: "${CLOUDINARY_URL}"
+      ALLOW_DB_DROP: "true"
 
 volumes:
   postgres_data:

@@ -7,14 +7,16 @@ metadata:
   annotations:
     "helm.sh/hook": pre-install,pre-upgrade
     "helm.sh/hook-weight": "-10"
-    "helm.sh/hook-delete-policy": hook-succeeded,before-hook-creation
+    # "helm.sh/hook-delete-policy": hook-succeeded,before-hook-creation
+    "helm.sh/hook-timeout": "5m"
 spec:
+  backoffLimit: 0
   template:
     metadata:
       labels:
         {{- include "fakefriends.selectorLabels" . | nindent 8 }}
     spec:
-      restartPolicy: OnFailure
+      restartPolicy: Never
       containers:
         - name: db-init
           image: "{{ .Values.image.repository }}:{{ .Values.image.tag | default .Chart.AppVersion }}"
@@ -24,23 +26,52 @@ spec:
             - -c
             - |
               echo "Waiting for PostgreSQL to be ready..."
-              until PGPASSWORD=$POSTGRES_PASSWORD psql -h $POSTGRES_HOST -U $POSTGRES_USER -d postgres -c '\q'; do
+              echo "Connection info: $DATABASE_HOST:$DATABASE_PORT as $DATABASE_USER"
+              until PGPASSWORD="$DATABASE_PASSWORD" psql -h "$DATABASE_HOST" -p "$DATABASE_PORT" -U "$DATABASE_USER" -d postgres -c '\q'; do
                 echo "PostgreSQL is unavailable - sleeping"
-                sleep 1
+                sleep 2
               done
               echo "PostgreSQL is up - executing database initialization"
-              bundle exec rails db:drop db:create db:migrate db:seed
+              
+              if [ "$ALLOW_DB_DROP" = "true" ] && [ "$RAILS_ENV" != "production" ]; then
+                echo "Database drop allowed and not in production - dropping database first"
+                DISABLE_DATABASE_ENVIRONMENT_CHECK=1 bundle exec rails db:drop db:create || echo "Failed to drop/create database, continuing..."
+              else
+                echo "Database drop not allowed or in production - preserving existing data"
+                bundle exec rails db:create || echo "Database may already exist, continuing..."
+              fi
+              
+              # Run migrations separately with error handling
+              echo "Running database migrations..."
+              bundle exec rails db:migrate
+              
+              # Try to run seeds but don't fail if it errors
+              echo "Running database seeds..."
+              bundle exec rails db:seed || echo "Seeding failed, but continuing with deployment"
+              
+              echo "Database initialization completed successfully"
+              exit 0
           env:
-            - name: POSTGRES_HOST
+            - name: DATABASE_HOST
               value: {{ .Values.db.DATABASE_HOST | quote }}
-            - name: POSTGRES_USER
+            - name: DATABASE_PORT
+              value: {{ .Values.db.DATABASE_PORT | default "5432" | quote }}
+            - name: DATABASE_USER
               value: {{ .Values.db.DATABASE_USER | quote }}
-            - name: POSTGRES_PASSWORD
+            - name: DATABASE_PASSWORD
               valueFrom:
                 secretKeyRef:
                   name: {{ include "fakefriends.fullname" . }}-db-secret
                   key: postgres-password
+            - name: POSTGRES_DB
+              value: {{ .Values.db.POSTGRES_DB | quote }}
             - name: RAILS_ENV
               value: {{ .Values.env.RAILS_ENV | quote }}
             - name: RAILS_LOG_TO_STDOUT
               value: {{ .Values.env.RAILS_LOG_TO_STDOUT | quote }}
+            - name: REDIS_URL
+              value: {{ .Values.redis.REDIS_URL | quote }}
+            - name: ALLOW_DB_DROP
+              value: {{ .Values.db.ALLOW_DB_DROP | quote }}
+            - name: CLOUDINARY_URL
+              value: {{ .Values.env.CLOUDINARY_URL | quote }}

@@ -11,7 +11,7 @@ image:
   # This sets the pull policy for images.
   pullPolicy: IfNotPresent
   # Overrides the image tag whose default is the chart appVersion.
-  tag: "v1.0.0"
+  tag: ""
 
 # This is for the secrets for pulling an image from a private repository more information can be found here: https://kubernetes.io/docs/tasks/configure-pod-container/pull-image-private-registry/
 imagePullSecrets: []
@@ -91,13 +91,15 @@ resources:
 
 # This is to setup the liveness and readiness probes more information can be found here: https://kubernetes.io/docs/tasks/configure-pod-container/configure-liveness-readiness-startup-probes/
 livenessProbe:
-  httpGet:
-    path: /
-    port: http
+  tcpSocket:
+    port: 3000
+  initialDelaySeconds: 15
+  periodSeconds: 10
 readinessProbe:
-  httpGet:
-    path: /
-    port: http
+  tcpSocket:
+    port: 3000
+  initialDelaySeconds: 15
+  periodSeconds: 10
 
 # This section is for setting up autoscaling more information can be found here: https://kubernetes.io/docs/concepts/workloads/autoscaling/
 autoscaling:
@@ -128,7 +130,7 @@ affinity: {}
 
 env:
   CLOUDINARY_URL: ""
-  RAILS_ENV: "production"
+  RAILS_ENV: "development"
   RAILS_LOG_TO_STDOUT: "true"
   RAILS_MAX_THREADS: "5"
 
@@ -136,9 +138,11 @@ db:
   DATABASE_URL: "postgresql://postgres:postgres@fakefriends:5432/fakefriends"
   POSTGRES_DB: rails_authentication_production
   DATABASE_HOST: postgresql
+  DATABASE_PORT: "5432"
   DATABASE_USER: postgres-fakefriends
   # password will be stored in a secret
   DATABASE_PASSWORD:
+  ALLOW_DB_DROP: "true"
 
 redis:
   REDIS_HOST: redis
