@@ -1,6 +1,7 @@
 GIT
   remote: https://github.com/heartcombo/simple_form.git
-  revision: 921ce9c3fc100e1737125ba1b5a2037c03f2de1b
+  revision: b64399767ab8b64fc4b84d5224172ad17a7d4c84
+  tag: v5.2.0
   specs:
     simple_form (5.2.0)
       actionpack (>= 5.2)
@@ -284,35 +285,33 @@ PLATFORMS
   x86_64-linux
 
 DEPENDENCIES
-  autoprefixer-rails
-  axios_rails
-  bootsnap
-  capybara
-  cloudinary
-  debug
-  devise
-  dotenv-rails
-  faker
-  font-awesome-sass
-  jbuilder
-  jsbundling-rails
-  pg
-  puma
-  rails
-  redis
-  sassc-rails
-  selenium-webdriver
+  autoprefixer-rails (= 10.4.13.0)
+  axios_rails (= 0.7.0)
+  bootsnap (= 1.16.0)
+  capybara (= 3.38.0)
+  cloudinary (= 1.25.0)
+  debug (= 1.7.1)
+  devise (= 4.9.0)
+  dotenv-rails (= 2.8.1)
+  faker (= 3.1.1)
+  font-awesome-sass (= 6.3.0)
+  jbuilder (= 2.11.5)
+  jsbundling-rails (= 1.1.1)
+  pg (= 1.4.6)
+  puma (= 5.6.5)
+  rails (= 7.0.4.2)
+  redis (= 4.8.1)
+  sassc-rails (= 2.1.2)
+  selenium-webdriver (= 4.8.1)
   simple_form!
-  sprockets-rails
-  stimulus-rails
-  turbo-rails
-  tzinfo-data
-  uri
-  web-console
-  webdrivers
+  stimulus-rails (= 1.2.1)
+  turbo-rails (= 1.4.0)
+  uri (= 0.12.0)
+  web-console (= 4.2.0)
+  webdrivers (= 5.2.0)
 
 RUBY VERSION
    ruby 3.2.2p53
 
 BUNDLED WITH
-   2.4.7
+   2.4.10
