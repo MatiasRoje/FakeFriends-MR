@@ -51,4 +51,4 @@ jobs:
           helm registry login registry-1.docker.io -u ${{ secrets.DOCKERHUB_USERNAME }} -p ${{ secrets.DOCKERHUB_TOKEN }}
           helm package k8s/helm/fakefriends/
           CHART_VERSION=$(grep 'version:' k8s/helm/fakefriends/Chart.yaml | awk '{print $2}')
-          helm push fakefriends-${CHART_VERSION}.tgz oci://registry-1.docker.io/${{ secrets.DOCKERHUB_USERNAME }}/helm-charts
+          helm push fakefriends-${CHART_VERSION}.tgz oci://registry-1.docker.io/${{ secrets.DOCKERHUB_USERNAME }}/
